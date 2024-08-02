@@ -16,7 +16,7 @@ else:
 limpaTela = lambda comando="clear" : system("cls") if platform.system() == "Windows" else system(comando)
 
 #Função anônima que imprime uma linha na tela
-l = lambda tam=20: print("-=" * tam)
+l = lambda simb="-=", tam=20 : print(simb * tam)
 
 #Função que imprime uma mensagem animada na tela
 def msgAnimada(msg="teste", animacao=True, end="\n", tempo=0.03):
