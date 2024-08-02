@@ -1,1 +1,14 @@
 
+# Ignorar todos os diretórios __pycache__ em qualquer lugar do projeto
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorar outros arquivos desnecessários ou temporários
+*.log
+*.sqlite3
+
+# Ignorar diretórios de ambiente virtual
+venv/
+.env/
