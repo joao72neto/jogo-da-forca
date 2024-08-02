@@ -6,9 +6,9 @@ TAM = 40
 
 #Título
 limpaTela()
-msgAnimada("——" * (TAM // 2), False)
-msgAnimada(f"{'Jogo da Forca':^{TAM}}", False)
-msgAnimada("——" * (TAM // 2), False)
+msgAnimada("——" * (TAM // 2))
+msgAnimada(f"{'Jogo da Forca':^{TAM}}")
+msgAnimada("——" * (TAM // 2))
 
 #Definindo as palavras do jogo
 palavras = ["arroz", "feijao", "batata", "uva", "morango"]
@@ -16,25 +16,26 @@ palavras = ["arroz", "feijao", "batata", "uva", "morango"]
 # --------------------------------------------------------------------------- 
 
 #1ª Parte do desenho da forca
-print("""
+msgAnimada("""
         +---+
         |   |
         O   |
-       /|\  |     """, end="")
+       /|\  |     """, True, "", 0.018)
 
 
 #Mostranado os espaços das letras
 word = choice(palavras)
-print("_ " * len(word), end="")
+msgAnimada("_ " * len(word), True, "", 0.018)
 
 
 #2ª perte do desenho da forca 
-print("""
+msgAnimada("""
        / \  |
             |
         ========
-""", end="\n")
+""", True, "\n", 0.018)
 
 #Pedindo as letra para o usuário
 l("——")
-print("Insira uma letra: \n")
+print("Insira uma letra: ")
+l("——")
