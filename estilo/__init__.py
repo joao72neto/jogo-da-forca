@@ -1,0 +1,1 @@
+from .modulo import msgAnimada, l, limpaTela
