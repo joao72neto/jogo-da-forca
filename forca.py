@@ -1,7 +1,6 @@
 #Imports Gerais
 from estilo import limpaTela, l, msgAnimada, valorInvalido
 from random import choice
-from time import sleep
 
 #Contantes
 TAM = 40
