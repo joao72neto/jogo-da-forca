@@ -1,4 +1,5 @@
-from estilo import limpaTela, l, msgAnimada
+#Imports Gerais
+from estilo import limpaTela, l, msgAnimada, valorInvalido
 from random import choice
 from time import sleep
 
@@ -8,8 +9,8 @@ TAM = 40
 #Variáveis globais
 animacao = True
 
-#Título
 while True:
+    #Título
     limpaTela()
     msgAnimada("——" * (TAM // 2), animacao)
     msgAnimada(f"{'Jogo da Forca':^{TAM}}", animacao)
@@ -41,10 +42,10 @@ while True:
 
     #Pedindo as letra para o usuário
     l("——")
-    
     letra = input("Insira uma letra: ")
     try:
         if letra[0].isnumeric():
+            valorInvalido("Número não é um valor válido", "——")
             animacao = False
             continue
         else:
@@ -52,8 +53,7 @@ while True:
             animacao = True
             break
     except IndexError:
-        print("Espaço não é uma letra")
-        sleep(1)
+        valorInvalido("Espaço não é um valor válido", "——")
         animacao = False
         continue
-l("——")
+   
