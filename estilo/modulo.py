@@ -4,6 +4,9 @@ from os import system
 from time import sleep
 from sys import stdin
 
+#Constantes
+TAM = 40
+
 #Imports por plataforma
 if platform.system() == "Windows":
     import msvcrt
@@ -32,6 +35,19 @@ def msgAnimada(msg="teste", animacao=True, end="\n", tempo=0.03):
             limparBuffer()
     else:
         print(msg, end=end)
+
+#Mostrando mensagem de valor não correspondente 
+def valorInvalido(texto="Valor Inválido", simb = "-=", tempo=0.03, animacao=True):
+    old = matarInput()
+    try:
+        limpaTela()
+        l(simb)
+        msgAnimada(f"{texto:^{TAM}}", animacao, "\n", tempo)
+        l(simb)
+        sleep(0.3) if animacao else sleep(1)
+    finally:
+        reviverInput(old)
+        limparBuffer()
 
 #------------------------------------Dependências-----------------------------------------#
 

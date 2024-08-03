@@ -1,1 +1,1 @@
-from .modulo import msgAnimada, l, limpaTela
+from .modulo import msgAnimada, l, limpaTela, valorInvalido
