@@ -37,5 +37,12 @@ msgAnimada("""
 
 #Pedindo as letra para o usuário
 l("——")
-print("Insira uma letra: ")
+while True:
+    letra = input("Insira uma letra: ")
+    
+    if letra[0].isnumeric():
+        print("")
+        continue
+    else:
+        break
 l("——")
