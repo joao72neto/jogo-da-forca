@@ -42,10 +42,10 @@ while True:
 
     #Pedindo as letra para o usuário
     l("——")
-    letra = input("Insira uma letra: ")
+    letra = input("Insira uma letra: ").strip()
     try:
-        if letra[0].isnumeric():
-            valorInvalido("Número não é um valor válido", "——")
+        if not letra[0].isalpha():
+            valorInvalido("Números ou símbolos não são válidos", "——")
             animacao = False
             continue
         else:
@@ -53,7 +53,7 @@ while True:
             animacao = True
             break
     except IndexError:
-        valorInvalido("Espaço não é um valor válido", "——")
+        valorInvalido("Espaços não são válidos", "——")
         animacao = False
         continue
    
