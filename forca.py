@@ -17,7 +17,7 @@ while True:
 
     #Definindo as palavras do jogo
     palavras = ["arroz", "feijao", "batata", "uva", "morango"]
-    word = palavras[0]
+    word = choice(palavras)
     # --------------------------------------------------------------------------- 
 
     #1ª Parte do desenho da forca
@@ -48,11 +48,14 @@ while True:
             animacao = False
             continue
         else:
-            word = choice(palavras)
             animacao = True
             break
     except IndexError:
         valorInvalido("Espaços não são válidos", "——")
         animacao = False
         continue
-   
+
+
+#Verificando as letras
+if letra in word:
+    print(word)
