@@ -7,6 +7,8 @@ TAM = 40
 
 #Variáveis globais
 animacao = True
+letra = ""
+c=0
 
 while True:
     #Título
@@ -17,7 +19,7 @@ while True:
 
     #Definindo as palavras do jogo
     palavras = ["arroz", "feijao", "batata", "uva", "morango"]
-    word = choice(palavras)
+    if c == 0 : word = choice(palavras)
     # --------------------------------------------------------------------------- 
 
     #1ª Parte do desenho da forca
@@ -29,7 +31,10 @@ while True:
 
 
     #Mostranado os espaços das letras
-    msgAnimada("_ " * len(word), animacao, "", 0.018)
+    for ele in word:
+        msgAnimada(f"{letra} ", animacao, "") if ele == letra else msgAnimada("_ ", animacao, "")
+
+    #msgAnimada("_ " * len(word), animacao, "", 0.018)
 
 
     #2ª perte do desenho da forca 
@@ -40,22 +45,22 @@ while True:
     """, animacao, "\n", 0.018)
 
     #Pedindo as letra para o usuário
+    animacao = False
     l("——")
     letra = input("Insira uma letra: ").strip()
     try:
         if not letra[0].isalpha():
+            #Bloco inválido 1
             valorInvalido("Números ou símbolos não são válidos", "——")
-            animacao = False
             continue
         else:
-            animacao = True
-            break
+            #Bloco verdadeiro
+            if letra not in word : c += 1
+            if c == 6: break
+            continue
+
     except IndexError:
+        #Bloco inválido 2
         valorInvalido("Espaços não são válidos", "——")
-        animacao = False
         continue
 
-
-#Verificando as letras
-if letra in word:
-    print(word)
