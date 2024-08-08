@@ -8,9 +8,15 @@ TAM = 40
 #Variáveis globais
 animacao = True
 letra = ""
+frase = []
 c=0
 
+#Definindo as palavras 
+palavras = ["arroz", "feijao", "batata", "uva", "morango"]
+word = choice(palavras)
+
 while True:
+
     #Título
     limpaTela()
     msgAnimada("——" * (TAM // 2), animacao)
@@ -18,8 +24,7 @@ while True:
     msgAnimada("——" * (TAM // 2), animacao)
 
     #Definindo as palavras do jogo
-    palavras = ["arroz", "feijao", "batata", "uva", "morango"]
-    if c == 0 : word = choice(palavras)
+    if frase == word: word = choice(palavras)
     # --------------------------------------------------------------------------- 
 
     #1ª Parte do desenho da forca
@@ -33,8 +38,17 @@ while True:
     #Mostranado os espaços das letras
     for ele in word:
         msgAnimada(f"{letra} ", animacao, "") if ele == letra else msgAnimada("_ ", animacao, "")
-
-    #msgAnimada("_ " * len(word), animacao, "", 0.018)
+        frase.append(letra)
+    
+    #Mostando a palavra
+    #for ele in word:
+        #if ele == letra:
+            #frase.append(f"{ele} ")
+     
+    
+    #Mostrando a palavra
+    #for i, ele in enumerate(word):
+        #print(f"{frase[i]} ", end="") if frase[i] == ele else print("_ ", end="")
 
 
     #2ª perte do desenho da forca 
@@ -53,6 +67,7 @@ while True:
             #Bloco inválido 1
             valorInvalido("Números ou símbolos não são válidos", "——")
             continue
+
         else:
             #Bloco verdadeiro
             if letra not in word : c += 1
@@ -63,4 +78,3 @@ while True:
         #Bloco inválido 2
         valorInvalido("Espaços não são válidos", "——")
         continue
-
