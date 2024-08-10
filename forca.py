@@ -8,8 +8,7 @@ TAM = 40
 #Variáveis globais
 animacao = True
 letra = ""
-
-c=0
+c=primeiraLetra=0
 
 #Definindo as palavras 
 palavras = ["arroz", "feijao", "batata", "uva", "morango"]
@@ -17,14 +16,29 @@ word = choice(palavras)
 
 #Espaço para preencher as palavras
 frase = ["_ "] * len(word)
+letrasUsadas = []
 
 while True:
 
     #Título
-    limpaTela()
-    msgAnimada("——" * (TAM // 2), animacao)
-    msgAnimada(f"{'Jogo da Forca':^{TAM}}", animacao)
-    msgAnimada("——" * (TAM // 2), animacao)
+    if primeiraLetra == 0:
+        limpaTela()
+        msgAnimada("——" * (TAM // 2), animacao)
+        msgAnimada(f"{'Jogo da Forca':^{TAM}}", animacao)
+        msgAnimada("——" * (TAM // 2), animacao)
+    else:
+        limpaTela()
+        if letra not in word: letrasUsadas.append(letra)
+        msgAnimada("——" * (TAM // 2), animacao)
+        
+        #Mostrando as letras
+        if letrasUsadas == []:
+            msgAnimada(f"{'Tentativas aparecerão aqui':^{TAM}}", animacao)
+        else:
+            letrasJuntas = " ".join (ele.upper() for ele in letrasUsadas)
+            print(f'{letrasJuntas:^{TAM}} ')
+
+        msgAnimada("——" * (TAM // 2), animacao)
 
     #Definindo as palavras do jogo
     if frase == word: word = choice(palavras)
@@ -70,6 +84,7 @@ while True:
 
         else:
             #Bloco verdadeiro
+            primeiraLetra += 1
             if letra not in word : c += 1
             if c == 6 : break
             continue
