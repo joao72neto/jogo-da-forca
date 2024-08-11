@@ -1,3 +1,180 @@
+def boneco(contador):
+    if contador == 0:
+        #1ª Parte do desenho da forca
+        msgAnimada("""
+                +---+
+                |   |
+                    |
+                    |     """, animacao, "", 0.018)
+
+
+        #Montando a palavra
+        for i, v in enumerate(word):
+            if v == letra:
+                frase[i] = f"{letra.upper()} "
+
+        #Mostrando a frase    
+        for ele in frase:
+            msgAnimada(ele, animacao, "")
+            
+            
+        #2ª perte do desenho da forca 
+        msgAnimada("""
+                    |
+                    |
+                ========
+        """, animacao, "\n", 0.018)
+    elif contador == 1:
+        #1ª Parte do desenho da forca
+        msgAnimada("""
+                +---+
+                |   |
+                O   |
+                    |     """, animacao, "", 0.018)
+
+
+        #Montando a palavra
+        for i, v in enumerate(word):
+            if v == letra:
+                frase[i] = f"{letra.upper()} "
+
+        #Mostrando a frase    
+        for ele in frase:
+            msgAnimada(ele, animacao, "")
+            
+            
+        #2ª perte do desenho da forca 
+        msgAnimada("""
+                    |
+                    |
+                ========
+        """, animacao, "\n", 0.018)
+    elif contador == 2:
+       #1ª Parte do desenho da forca
+        msgAnimada("""
+                +---+
+                |   |
+                O   |
+                |   |     """, animacao, "", 0.018)
+
+
+        #Montando a palavra
+        for i, v in enumerate(word):
+            if v == letra:
+                frase[i] = f"{letra.upper()} "
+
+        #Mostrando a frase    
+        for ele in frase:
+            msgAnimada(ele, animacao, "")
+            
+            
+        #2ª perte do desenho da forca 
+        msgAnimada("""
+                    |
+                    |
+                ========
+        """, animacao, "\n", 0.018) 
+    elif contador == 3:
+        #1ª Parte do desenho da forca
+        msgAnimada("""
+                +---+
+                |   |
+                O   |
+               /|   |     """, animacao, "", 0.018)
+
+
+        #Montando a palavra
+        for i, v in enumerate(word):
+            if v == letra:
+                frase[i] = f"{letra.upper()} "
+
+        #Mostrando a frase    
+        for ele in frase:
+            msgAnimada(ele, animacao, "")
+            
+            
+        #2ª perte do desenho da forca 
+        msgAnimada("""
+                    |
+                    |
+                ========
+        """, animacao, "\n", 0.018)
+    elif contador == 4:
+        #1ª Parte do desenho da forca
+        msgAnimada("""
+                +---+
+                |   |
+                O   |
+               /|\  |     """, animacao, "", 0.018)
+
+
+        #Montando a palavra
+        for i, v in enumerate(word):
+            if v == letra:
+                frase[i] = f"{letra.upper()} "
+
+        #Mostrando a frase    
+        for ele in frase:
+            msgAnimada(ele, animacao, "")
+            
+            
+        #2ª perte do desenho da forca 
+        msgAnimada("""
+                    |
+                    |
+                ========
+        """, animacao, "\n", 0.018)
+    elif contador == 5:
+        #1ª Parte do desenho da forca
+        msgAnimada("""
+                +---+
+                |   |
+                O   |
+               /|\  |     """, animacao, "", 0.018)
+
+
+        #Montando a palavra
+        for i, v in enumerate(word):
+            if v == letra:
+                frase[i] = f"{letra.upper()} "
+
+        #Mostrando a frase    
+        for ele in frase:
+            msgAnimada(ele, animacao, "")
+            
+            
+        #2ª perte do desenho da forca 
+        msgAnimada("""
+               /    |
+                    |
+                ========
+        """, animacao, "\n", 0.018)
+    elif contador == 6:
+        #1ª Parte do desenho da forca
+        msgAnimada("""
+                +---+
+                |   |
+                O   |
+               /|\  |     """, animacao, "", 0.018)
+
+
+        #Montando a palavra
+        for i, v in enumerate(word):
+            if v == letra:
+                frase[i] = f"{letra.upper()} "
+
+        #Mostrando a frase    
+        for ele in frase:
+            msgAnimada(ele, animacao, "")
+            
+            
+        #2ª perte do desenho da forca 
+        msgAnimada("""
+               / \  |
+                    |
+                ========
+        """, animacao, "\n", 0.018)
+
 #Imports Gerais
 from estilo import limpaTela, l, msgAnimada, valorInvalido
 from random import choice
@@ -44,30 +221,10 @@ while True:
     if frase == word: word = choice(palavras)
     # --------------------------------------------------------------------------- 
 
-    #1ª Parte do desenho da forca
-    msgAnimada("""
-            +---+
-            |   |
-            O   |
-           /|\  |     """, animacao, "", 0.018)
+    #1ª Mostrando o boneco 
+    boneco(c)
 
-
-    #Montando a palavra
-    for i, v in enumerate(word):
-        if v == letra:
-            frase[i] = f"{letra.upper()} "
-
-    #Mostrando a frase    
-    for ele in frase:
-        msgAnimada(ele, animacao, "")
-        
-        
-    #2ª perte do desenho da forca 
-    msgAnimada("""
-           / \  |
-                |
-            ========
-    """, animacao, "\n", 0.018)
+    # ---------------------------------------------------------------------------
 
     #Verificando a vitória ou derrota
     if "_ " not in frase: break
