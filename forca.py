@@ -184,75 +184,95 @@ TAM = 40
 
 #Variáveis globais
 animacao = True
-letra = ""
-c=primeiraLetra=0
 
 #Definindo as palavras 
-palavras = ["arroz", "feijao", "batata", "uva", "morango"]
-word = choice(palavras)
-
-#Espaço para preencher as palavras
-frase = ["_ "] * len(word)
-letrasUsadas = []
+palavras = ["arroz", "feijao", "batata", "uva", "morango", "chocolate",]
 
 while True:
+    #Escolhendo uma nova palavra 
+    word = choice(palavras)
 
-    #Título
-    if primeiraLetra == 0:
-        limpaTela()
-        msgAnimada("——" * (TAM // 2), animacao)
-        msgAnimada(f"{'Jogo da Forca':^{TAM}}", animacao)
-        msgAnimada("——" * (TAM // 2), animacao)
-    else:
-        limpaTela()
-        if letra not in word: letrasUsadas.append(letra[0])
-        msgAnimada("——" * (TAM // 2), animacao)
-        
-        #Mostrando as letras
-        if letrasUsadas == []:
-            msgAnimada(f"{'Tentativas aparecerão aqui':^{TAM}}", animacao)
+    #Espaço para preencher as palavras
+    frase = ["_ "] * len(word)
+    letrasUsadas = []
+
+    #Resetando as letras
+    letra = ""
+    c=primeiraLetra=0
+
+    while True:
+
+        #Título
+        if primeiraLetra == 0:
+            limpaTela()
+            msgAnimada("——" * (TAM // 2), animacao)
+            msgAnimada(f"{'Jogo da Forca':^{TAM}}", animacao)
+            msgAnimada("——" * (TAM // 2), animacao)
         else:
-            letrasJuntas = " ".join (ele.upper() for ele in letrasUsadas)
-            print(f'{letrasJuntas:^{TAM}} ')
+            limpaTela()
+            if letra not in word: letrasUsadas.append(letra[0])
+            msgAnimada("——" * (TAM // 2), animacao)
+            
+            #Mostrando as letras
+            if letrasUsadas == []:
+                msgAnimada(f"{'Tentativas aparecerão aqui':^{TAM}}", animacao)
+            else:
+                letrasJuntas = " ".join (ele.upper() for ele in letrasUsadas)
+                print(f'{letrasJuntas:^{TAM}} ')
 
-        msgAnimada("——" * (TAM // 2), animacao)
+            msgAnimada("——" * (TAM // 2), animacao)
 
-    #Definindo as palavras do jogo
-    if frase == word: word = choice(palavras)
-    # --------------------------------------------------------------------------- 
+        #Definindo as palavras do jogo
+        if frase == word: word = choice(palavras)
+        # --------------------------------------------------------------------------- 
 
-    #1ª Mostrando o boneco 
-    boneco(c)
+        #1ª Mostrando o boneco 
+        boneco(c)
 
-    # ---------------------------------------------------------------------------
+        # ---------------------------------------------------------------------------
 
-    #Verificando a vitória ou derrota
-    if "_ " not in frase: break
+        #Verificando a vitória ou derrota
+        if "_ " not in frase: break
 
-    #Pedindo as letra para o usuário
-    animacao = False
+        #Pedindo as letra para o usuário
+        animacao = False
+        l("——")
+        letra = input("Insira uma letra: ").strip()
+        try:
+            if not letra[0].isalpha():
+                #Bloco inválido 1
+                valorInvalido("Números ou símbolos não são válidos", "——")
+                continue
+
+            else:
+                #Bloco verdadeiro
+                primeiraLetra += 1
+                if letra not in word : c += 1
+                if c == 6 : break
+                continue
+
+        except IndexError:
+            #Bloco inválido 2
+            valorInvalido("Espaços não são válidos", "——")
+            continue
+
+    #Status
+    limpaTela()
     l("——")
-    letra = input("Insira uma letra: ").strip()
-    try:
-        if not letra[0].isalpha():
-            #Bloco inválido 1
-            valorInvalido("Números ou símbolos não são válidos", "——")
+    print(f"{'Você morreu!':^{TAM}}") if c == 6 else print(f"{'Você sobreviveu!':^{TAM}}")
+    l("——")
+
+    #Perguntando se o jogador deseja jogar novamente
+    sair = False
+    while True:
+        resp = str(input("Deseja jogar novamente [S/N]: "))
+        if resp[0] in ["s", "S"]:
+            break
+        elif resp[0] in ["n", "N"]:
+            sair = True
+            break
+        else: 
+            valorInvalido('Digite apenas "S" ou "N"', "——")
             continue
 
-        else:
-            #Bloco verdadeiro
-            primeiraLetra += 1
-            if letra not in word : c += 1
-            if c == 6 : break
-            continue
-
-    except IndexError:
-        #Bloco inválido 2
-        valorInvalido("Espaços não são válidos", "——")
-        continue
-
-#Status
-limpaTela()
-l("——")
-print(f"{'Você morreu!':^{TAM}}") if c == 6 else print(f"{'Você sobreviveu!':^{TAM}}")
-l("——")
+    if sair: break
