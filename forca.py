@@ -246,6 +246,7 @@ while True:
 
             else:
                 #Bloco verdadeiro
+                letra = letra[0]
                 primeiraLetra += 1
                 if letra not in word or letra.upper() + " " in frase: c += 1
                 if c == 6 : break
