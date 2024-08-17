@@ -224,7 +224,7 @@ while True:
             msgAnimada("——" * (TAM // 2), animacao)
         else:
             limpaTela()
-            if letra not in word: letrasUsadas.append(letra[0])
+            if letra not in word and not letra.isnumeric(): letrasUsadas.append(letra[0])
             msgAnimada("——" * TAM, animacao)
             
             #Mostrando as letras
