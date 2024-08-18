@@ -37,13 +37,13 @@ def msgAnimada(msg="teste", animacao=True, end="\n", tempo=0.03):
         print(msg, end=end)
 
 #Mostrando mensagem de valor não correspondente 
-def valorInvalido(texto="Valor Inválido", simb = "-=", tempo=0.03, animacao=True):
+def valorInvalido(texto="Valor Inválido", simb = "-=", tam=TAM, tempo=0.03, animacao=True):
     old = matarInput()
     try:
         limpaTela()
-        l(simb)
-        msgAnimada(f"{texto:^{TAM}}", animacao, "\n", tempo)
-        l(simb)
+        l(simb, (tam // 2))
+        msgAnimada(f"{texto:^{tam}}", animacao, "\n", tempo)
+        l(simb, (tam // 2))
         sleep(0.3) if animacao else sleep(1)
     finally:
         reviverInput(old)
