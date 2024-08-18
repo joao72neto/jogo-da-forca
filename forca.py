@@ -184,6 +184,7 @@ TAM = 40
 
 #Variáveis globais
 animacao = True
+tempo = 0.02
 
 #Definindo as palavras 
 palavras = [
@@ -201,6 +202,11 @@ palavras = [
     "firmeza", "confiança", "respeito", "sabedoria", "amizade", "esperança"
 ]
 
+#opções de temas
+temasPossiveis = ["Comida", "Sentimentos", "Games", "Instrumentos", "Filmes"]
+
+#Mostranso menus
+temas=mainTitle=True
 
 while True:
     #Escolhendo uma nova palavra 
@@ -212,50 +218,44 @@ while True:
 
     #Resetando as letras
     letra = ""
-    c=primeiraLetra=0
-
+    c=primeiroErro=0
+    
     while True:
-
-        #Título
-        if primeiraLetra == 0:
-            limpaTela()
-            msgAnimada("——" * (TAM // 2), animacao)
-            msgAnimada(f"{'Jogo da Forca':^{TAM}}", animacao)
-            msgAnimada("——" * (TAM // 2), animacao)
-        else:
-            limpaTela()
-            if letra not in word and not letra.isnumeric(): letrasUsadas.append(letra[0])
-            msgAnimada("——" * TAM, animacao)
-            
-            #Mostrando as letras
-            if letrasUsadas == []:
-                msgAnimada(f"{'Tentativas aparecerão aqui':^{TAM*2}}", animacao)
-            else:
-                letrasJuntas = " ".join (ele.upper() for ele in letrasUsadas)
-                print(f'{letrasJuntas:^{TAM*2}} ')
-
-
+   
         #Definindo as palavras do jogo
         if frase == word: word = choice(palavras)
 
         # --------------------------------------------------------------------------- 
 
         #Adicionando tema
-        if animacao:
+        if temas:
             while True:
-                if not animacao : msgAnimada("——" * (TAM // 2), animacao)
-                msgAnimada("Escolha um tema abaixo:", animacao)
-                msgAnimada("——" * (TAM // 2), animacao)
+            
+                #Título de apresentação
+                if mainTitle:
+                    limpaTela()
+                    l("——")
+                    msgAnimada(f"{'Jogo da Forca':^{TAM}}", animacao)
+                    l("——")
+                    msgAnimada("Escolha um tema abaixo:", animacao)
+                    l("——")
+                else:
+                    limpaTela()
+                    l("——")
+                    msgAnimada("Escolha um outro tema abaixo:", animacao)
+                    l("——")
+                
+                #Escolhendo as categorias
                 msgAnimada("1 - Comida", animacao)
                 msgAnimada("2 - Sentimentos", animacao)
                 msgAnimada("3 - Games", animacao)
-                msgAnimada("4 - Instrumenotos", animacao)
+                msgAnimada("4 - Instrumentos", animacao)
                 msgAnimada("5 - Filmes", animacao)
-                msgAnimada("——" * (TAM // 2), animacao)
+                l("——")
 
                 #Pegando o tema que o usuário escolheu
-            
                 msgAnimada("Sua escolha: ", animacao, "")
+                
                 try:
                     tema = str(input())
                     tema = int(tema)
@@ -276,9 +276,30 @@ while True:
 
         # --------------------------------------------------------------------------- 
 
+        #Título para mostrar letras inválidas
+        limpaTela()
+        if primeiroErro != 0:
+            
+            if letra not in word and not letra.isnumeric() and letra not in letrasUsadas:
+                letrasUsadas.append(letra[0])
+            
+            #Mostrando as letras inválidas
+            print()
+            if len(letrasUsadas) == 1:
+                letrasJuntas ="Letra Usada: " + " ".join (ele.upper() for ele in letrasUsadas)
+            else:
+                letrasJuntas ="Letras Usadas: " + " ".join (ele.upper() for ele in letrasUsadas)
+            print(f'{letrasJuntas:^{TAM*2}} ')
+            print()
+
+        #Mostrando o tema selecionado
+        l("——", TAM)
+        temaEscolhido = "Tema Escolhido: " + "".join(temasPossiveis[tema-1])
+        msgAnimada(f"{temaEscolhido:^{TAM*2}}", animacao)
+     
+
         #1ª Mostrando o boneco 
-        if animacao : limpaTela()
-        msgAnimada("——" * (TAM), animacao)
+        l("——", TAM)
         boneco(c)
 
         # ---------------------------------------------------------------------------
@@ -287,40 +308,51 @@ while True:
         if "_ " not in frase: break
 
         #Pedindo as letra para o usuário
-        animacao = False
+        temas = False
+        animacao=True
         l("——", 40)
-        letra = input("Insira uma letra: ").strip()
+        msgAnimada("Insira uma letra: ", animacao, "")
+        animacao=False
+        letra = input().strip()
         try:
             if not letra[0].isalpha():
                 #Bloco inválido 1
-                valorInvalido("Números ou símbolos não são válidos", "——")
+                valorInvalido("Números ou símbolos não são válidos", "——", 80)
+                limpaTela()
                 continue
 
             else:
                 #Bloco verdadeiro
                 letra = letra[0]
-                primeiraLetra += 1
-                if letra not in word or letra.upper() + " " in frase: c += 1
+                
+                if letra not in word or letra.upper() + " " in frase: 
+                    c += 1
+                    primeiroErro += 1
+                    
                 if c == 6 : break
                 continue
 
         except IndexError:
             #Bloco inválido 2
-            valorInvalido("Espaços não são válidos", "——")
+            valorInvalido("Espaços não são válidos", "——", 80)
+            limpaTela()
             continue
 
     #Status
+    animacao=True
     limpaTela()
     l("——")
-    print(f"{'Você morreu!':^{TAM}}") if c == 6 else print(f"{'Você sobreviveu!':^{TAM}}")
+    msgAnimada(f"{'Você morreu!':^{TAM}}", animacao) if c == 6 else msgAnimada(f"{'Você sobreviveu!':^{TAM}}", animacao)
     l("——")
 
     #Perguntando se o jogador deseja jogar novamente
     sair = False
     while True:
-        resp = str(input("Deseja jogar novamente [S/N]: "))
+        msgAnimada("Deseja jogar novamente [S/N]: ", animacao, "")
+        resp = str(input())
         if resp[0] in ["s", "S"]:
-            animacao = True
+            temas = True
+            mainTitle=False
             break
         elif resp[0] in ["n", "N"]:
             sair = True
