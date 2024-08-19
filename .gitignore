@@ -12,3 +12,7 @@ __pycache__/
 # Ignorar diretórios de ambiente virtual
 venv/
 .env/
+.venv
+
+# Ignorando o pycharm
+*.idea
