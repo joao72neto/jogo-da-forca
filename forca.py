@@ -179,6 +179,10 @@ def boneco(contador):
         """, ANIMACAO, "\n", 0.018)
 
 
+def menu():
+    msgAnimada("1 - Início")
+    msgAnimada("2 - Configutações")
+
 # Contantes
 TAM = 40
 
@@ -290,6 +294,38 @@ while True:
                     msgAnimada("Escolha um outro tema abaixo:", ANIMACAO)
                     l("——")
 
+                '''
+                    ------------------------
+                    Jogo da Forca
+                    ------------------------
+                    1 - Start
+                        0 - Voltar
+                        -----------------------
+                        Escolha um modo de jogo
+                        -----------------------
+                        1 - Modo normal
+                            0 - voltar
+                            ---------------
+                            Temas
+                            ---------------
+                            1 - Alimento
+                            2 - Sentimentos
+                            3 - games
+                            4 - Instrumentos
+                            5 - Filmes
+                            ---------------
+                            Sua escolha:
+                            ---------------
+                                <inicia o game>
+                        2 - Modo aleatório
+                            <inicia o game>
+                    2 - Setting
+                        0 - Voltar
+                        -----------------------
+                        Configurações
+                        ------------------------
+                        1 - Desativar animações
+                '''
                 # Escolhendo as categorias
                 msgAnimada("1 - Alimentos", ANIMACAO)
                 msgAnimada("2 - Sentimentos", ANIMACAO)
