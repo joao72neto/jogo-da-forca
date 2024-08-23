@@ -5,262 +5,32 @@
 # Imports Gerais
 from random import choice
 from estilo import limpaTela, l, msgAnimada, valorInvalido
+from jogoDependencias import temas, boneco
 
-
-def boneco(contador):
-
-    """Função que Monta um boneco na Tela"""
-
-    if contador == 0:
-        # 1ª Parte do desenho da forca
-        msgAnimada("""
-                +---+
-                |   |
-                    |
-                    |     """, ANIMACAO, "", 0.018)
-
-
-        # Montando a palavra
-        for i, v in enumerate(word):
-            if v == LETRA:
-                frase[i] = f"{LETRA.upper()} "
-
-        # Mostrando a frase
-        for ele in frase:
-            msgAnimada(ele, ANIMACAO, "")
-
-        # 2ª perte do desenho da forca
-        msgAnimada("""
-                    |
-                    |
-                ========
-        """, ANIMACAO, "\n", 0.018)
-    elif contador == 1:
-        # 1ª Parte do desenho da forca
-        msgAnimada("""
-                +---+
-                |   |
-                O   |
-                    |     """, ANIMACAO, "", 0.018)
-
-        # Montando a palavra
-        for i, v in enumerate(word):
-            if v == LETRA:
-                frase[i] = f"{LETRA.upper()} "
-
-        # Mostrando a frase
-        for ele in frase:
-            msgAnimada(ele, ANIMACAO, "")
-
-        # 2ª perte do desenho da forca
-        msgAnimada("""
-                    |
-                    |
-                ========
-        """, ANIMACAO, "\n", 0.018)
-    elif contador == 2:
-        # 1ª Parte do desenho da forca
-        msgAnimada("""
-                +---+
-                |   |
-                O   |
-                |   |     """, ANIMACAO, "", 0.018)
-
-        # Montando a palavra
-        for i, v in enumerate(word):
-            if v == LETRA:
-                frase[i] = f"{LETRA.upper()} "
-
-        # Mostrando a frase
-        for ele in frase:
-            msgAnimada(ele, ANIMACAO, "")
-
-        # 2ª perte do desenho da forca
-        msgAnimada("""
-                    |
-                    |
-                ========
-        """, ANIMACAO, "\n", 0.018)
-    elif contador == 3:
-        # 1ª Parte do desenho da forca
-        msgAnimada("""
-                +---+
-                |   |
-                O   |
-               /|   |     """, ANIMACAO, "", 0.018)
-
-        # Montando a palavra
-        for i, v in enumerate(word):
-            if v == LETRA:
-                frase[i] = f"{LETRA.upper()} "
-
-        # Mostrando a frase
-        for ele in frase:
-            msgAnimada(ele, ANIMACAO, "")
-
-        # 2ª perte do desenho da forca
-        msgAnimada("""
-                    |
-                    |
-                ========
-        """, ANIMACAO, "\n", 0.018)
-    elif contador == 4:
-        #1ª Parte do desenho da forca
-        msgAnimada("""
-                +---+
-                |   |
-                O   |
-               /|\\  |     """, ANIMACAO, "", 0.018)
-
-        #Montando a palavra
-        for i, v in enumerate(word):
-            if v == LETRA:
-                frase[i] = f"{LETRA.upper()} "
-
-        #Mostrando a frase
-        for ele in frase:
-            msgAnimada(ele, ANIMACAO, "")
-
-        #2ª perte do desenho da forca
-        msgAnimada("""
-                    |
-                    |
-                ========
-        """, ANIMACAO, "\n", 0.018)
-    elif contador == 5:
-        #1ª Parte do desenho da forca
-        msgAnimada("""
-                +---+
-                |   |
-                O   |
-               /|\\  |     """, ANIMACAO, "", 0.018)
-
-
-        #Montando a palavra
-        for i, v in enumerate(word):
-            if v == LETRA:
-                frase[i] = f"{LETRA.upper()} "
-
-        #Mostrando a frase
-        for ele in frase:
-            msgAnimada(ele, ANIMACAO, "")
-
-
-        #2ª perte do desenho da forca
-        msgAnimada("""
-               /    |
-                    |
-                ========
-        """, ANIMACAO, "\n", 0.018)
-    elif contador == 6:
-        #1ª Parte do desenho da forca
-        msgAnimada("""
-                +---+
-                |   |
-                O   |
-               /|\\  |     """, ANIMACAO, "", 0.018)
-
-
-        #Montando a palavra
-        for i, v in enumerate(word):
-            if v == LETRA:
-                frase[i] = f"{LETRA.upper()} "
-
-        #Mostrando a frase
-        for ele in frase:
-            msgAnimada(ele, ANIMACAO, "")
-
-
-        #2ª perte do desenho da forca
-        msgAnimada("""
-               / \\  |
-                    |
-                ========
-        """, ANIMACAO, "\n", 0.018)
-
-
+#Criando o menu
 def menu():
     msgAnimada("1 - Início")
     msgAnimada("2 - Configutações")
 
-# Contantes
+
+#Centralização
 TAM = 40
 
-# Variáveis globais
+#Animações
 ANIMACAO = True
 TEMPO = 0.02
 
+#Mostrando menus
+TEMAS = MAINTITLE = True
+
 # Definindo as palavras
-palavras = {
-    "alimentos":
-    ["Pizza", "Pão", "Arroz", "Frango", "Sopa", "Bolo", "Queijo",
-    "Maçã", "Batata", "Peixe", "Manga", "Torta", "Uva", "Cereal",
-    "Milho", "Carne", "Salada", "Feijão", "Banana", "Melancia", "Ovo",
-    "Cenoura", "Morango", "Abacate", "Laranja", "Tomate", "Coco", "Melão",
-    "Biscoito", "Iogurte", "Macarrão", "Abobrinha", "Pimenta", "Pêra",
-    "Alface", "Berinjela", "Espinafre", "Azeitona", "Brócolis", "Castanha",
-    "Noz", "Amendoim", "Batata-doce", "Granola", "Açúcar", "Mel", "Goiaba",
-    "Lentilha", "Rabanete", "Couve"],
-    "sentimentos":
-    ["amigo", "futuro", "coragem", "felicidade", "alegria", "esperança",
-    "amizade", "sabedoria", "liberdade", "saudade", "aventura", "carinho",
-    "honestidade", "solidariedade", "justiça", "confiança", "RESPeito",
-    "gentileza", "humildade", "empatia", "persistência", "gratidao",
-    "determinação", "integridade", "paciência", "resiliência", "criatividade",
-    "inspiração", "equilíbrio", "tranquilidade", "sabedoria", "generosidade",
-    "compaixão", "tolerância", "serenidade", "fidelidade", "otimismo",
-    "entusiasmo", "prudência", "temperança", "lealdade", "altruísmo",
-    "compromisso", "serenidade", "honra", "dignidade", "coragem", "valentia",
-    "liderança", "vigilância", "disciplina", "versatilidade", "sabedoria",
-    "imparcialidade", "decisão", "criatividade", "dedicação", "zelo",
-    "firmeza", "confiança", "Respeito", "sabedoria", "amizade", "esperança"],
-    "games":
-    ["Super Mario", "The Legend of Zelda", "Minecraft", "Fortnite", "Call of Duty",
-    "Overwatch", "The Witcher", "Red Dead Redemption", "Grand Theft Auto", "Halo",
-    "Assassin's Creed", "FIFA", "League of Legends", "Valorant","Cyberpunk 2077",
-    "Dark Souls", "Elden Ring", "Animal Crossing", "Pokémon", "Metroid", "Tetris",
-    "Street Fighter", "Mortal Kombat", "Tekken", "Resident Evil", "Silent Hill",
-    "Bloodborne", "Horizon Zero Dawn", "God of War", "Uncharted", "Tomb Raider",
-    "Final Fantasy", "Dragon Quest", "World of Warcraft", "Starcraft", "Diablo",
-    "The Sims", "SimCity", "Fallout", "Mass Effect", "Half-Life", "Dota 2",
-    "Counter-Strike", "Portal", "Apex Legends", "Rocket League", "PUBG", "Among Us",
-    "Celeste", "Stardew Valley", "Terraria", "Hades", "Undertale", "Bioshock",
-    "Gears of War", "Borderlands", "Far Cry", "Splatoon", "Destiny"],
-    "instrumentos":
-    ["Guitarra", "Piano", "Violino", "Bateria", "Baixo", "Flauta", "Trompete",
-    "Saxofone", "Clarinete", "Violoncelo", "Harpa", "Oboé", "Trombone", "Acordeão",
-    "Banjo", "Bandolim", "Ukulele", "Sintetizador", "Xilofone", "Harmônica", "Gaita de fole",
-    "Tímpano", "Marimba", "Conga", "Bongo", "Pandeiro", "Djembe", "Cajón",
-    "Flauta doce", "Órgão", "Fagote", "Piccolo", "Lira", "Triângulo", "Metalofone",
-    "Pratos", "Sitar", "Alaúde", "Rabeca", "Didgeridoo", "Flautas de pã", "Vibrafone",
-    "Clavicórdio", "Melódica", "Cítara", "Balalaica", "Kalimba", "Koto", "Tambura",
-    "Viola", "Maracas", "Tuba", "Eufônio", "Caixa", "Sinos", "Bumbo",
-    "Steel drum", "Handpan", "Ocarina"],
-    "filmes":
-    ["Titanic", "A Origem", "Avatar", "O Poderoso Chefão", "Pulp Fiction", "O Cavaleiro das Trevas",
-    "Forrest Gump", "Clube da Luta", "Matrix", "Gladiador", "Jurassic Park",
-    "Um Sonho de Liberdade", "Star Wars", "O Senhor dos Anéis", "Interestelar", "Os Vingadores",
-    "De Volta para o Futuro", "O Rei Leão", "A Lista de Schindler", "O Silêncio dos Inocentes",
-    "O Resgate do Soldado Ryan", "Alien", "O Exterminador do Futuro", "Coração Valente",
-    "Indiana Jones", "Os Bons Companheiros", "Casablanca", "Os Suspeitos", "Tubarão", "Rocky",
-    "E.T. - O Extraterrestre", "O Iluminado", "Scarface", "O Sexto Sentido",
-    "Seven: Os Sete Crimes Capitais", "Coringa", "Piratas do Caribe", "Vingadores: Ultimato",
-    "Harry Potter", "Capitão América", "Pantera Negra", "O Homem de Ferro", "O Hobbit",
-    "Guardiões da Galáxia", "O Lobo de Wall Street", "Django Livre", "O Grande Gatsby",
-    "A Origem dos Guardiões", "O Código Da Vinci", "Missão Impossível", "Os Incríveis",
-    "Homem-Aranha", "Thor: Ragnarok", "Jurassic World", "Os Oito Odiados", "A Bela e a Fera"]
-
-}
-
+palavras = temas()
 
 # Temas disponíveis
 temasPossiveis = ["alimentos", "sentimentos", "games", "instrumentos", "filmes"]
 
-# Mostrando menus
-TEMAS = MAINTITLE = True
 
-
-while True:
+while True: # Repete o jogo
 
     # Mostrar erros
     letrasUsadas = []
@@ -272,13 +42,13 @@ while True:
     # Gerando a frase completa
     frase = []
 
-    while True:
+    while True: # Atualiza as palabvras colocadas
 
         # ---------------------------------------------------------------------------
 
         # Adicionando tema
         if TEMAS:
-            while True:
+            while True: # Consistir Temas
 
                 # Título de apresentação
                 if MAINTITLE:
@@ -319,7 +89,7 @@ while True:
                                 <inicia o game>
                         2 - Modo aleatório
                             <inicia o game>
-                    2 - Setting
+                    2 - Settings
                         0 - Voltar
                         -----------------------
                         Configurações
@@ -392,7 +162,7 @@ while True:
 
         # 1ª Mostrando o boneco
         l("——", TAM)
-        boneco(C)
+        boneco(C, LETRA, word, frase, ANIMACAO)
 
         # ---------------------------------------------------------------------------
 
@@ -449,7 +219,7 @@ while True:
 
     # Perguntando se o jogador deseja jogar novamente
     SAIR = False
-    while True:
+    while True: # Consistir S ou N
 
         msgAnimada("Deseja jogar novamente [S/N]: ", ANIMACAO, "")
         RESP = str(input())
