@@ -9,8 +9,29 @@ from jogoDependencias import temas, boneco
 
 #Criando o menu
 def menu():
-    msgAnimada("1 - Início")
-    msgAnimada("2 - Configutações")
+    
+    inicio()
+    
+    if inicio():
+        modoNormal()
+        
+    configuracoes()
+    
+    if configuracoes():
+        modoAleatorio()
+        
+    
+def inicio():
+    msgAnimada("Teste")
+    
+def modoNormal():
+    msgAnimada("Teste")
+
+def modoAleatorio():
+    msgAnimada("Teste")
+
+def configuracoes():
+    msgAnimada("Teste")
 
 
 #Centralização
