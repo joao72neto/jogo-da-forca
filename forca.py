@@ -7,18 +7,52 @@ from random import choice
 from estilo import limpaTela, l, msgAnimada, valorInvalido
 from jogoDependencias import temas, boneco
 
+#Função pegaInteiros
+def pegarInteiros(inter=[]):
+  
+    try:
+        resp = int(input())
+        
+        if inter == []:
+            return resp
+        
+        elif resp not in inter:
+            valorInvalido("Valor fora do intervalo")
+            limpaTela()
+            return 0
+            
+        return resp
+        
+    except ValueError:
+        valorInvalido("Digite apenas números inteiros")
+        limpaTela()
+        return 0
+
+    
+    
+
+
 #Criando o menu
 def menu():
     
-    inicio()
-    
-    if inicio():
-        modoNormal()
+    # Menu principal
+    while True:
+        l("——")
+        msgAnimada("1 - Iniciar")
+        msgAnimada("2 - Configurações")
+        l("——")
+        #Pegando a respota do usuário
+        msgAnimada("Sua escolha: ", True, "")
+        resp = pegarInteiros([1, 2])
         
-    configuracoes()
-    
-    if configuracoes():
-        modoAleatorio()
+        if resp == 1:
+            inicio()
+            break
+        
+        elif resp == 2:
+            configuracoes()
+            break
+            
         
     
 def inicio():
@@ -84,6 +118,8 @@ while True: # Repete o jogo
                     l("——")
                     msgAnimada("Escolha um outro tema abaixo:", ANIMACAO)
                     l("——")
+
+                menu()
 
                 '''
                     ------------------------
