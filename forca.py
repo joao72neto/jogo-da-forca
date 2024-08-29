@@ -1,127 +1,6 @@
 """Programa que simula um jogo da forca"""
 
-# pylint: disable=c0103, r0912
-
-# Imports Gerais
-from random import choice
-from estilo import limpaTela, l, msgAnimada, valorInvalido
-from jogoDependencias import temas, boneco
-
-#Função pegaInteiros
-def pegarInteiros(inter=[]):
-  
-    try:
-        resp = int(input())
-        
-        if inter == []:
-            return resp
-        
-        elif resp not in inter:
-            valorInvalido("Valor fora do intervalo")
-            limpaTela()
-            return 0
-            
-        return resp
-        
-    except ValueError:
-        valorInvalido("Digite apenas números inteiros")
-        limpaTela()
-        return 0
-
-    
-    
-
-
-#Criando o menu
-def menu():
-    
-    # Menu principal
-    while True:
-        l("——")
-        msgAnimada("1 - Iniciar")
-        msgAnimada("2 - Configurações")
-        l("——")
-        #Pegando a respota do usuário
-        msgAnimada("Sua escolha: ", True, "")
-        resp = pegarInteiros([1, 2])
-        
-        if resp == 1:
-            inicio()
-            break
-        
-        elif resp == 2:
-            configuracoes()
-            break
-            
-        
-    
-def inicio():
-    msgAnimada("Teste")
-    
-def modoNormal():
-    msgAnimada("Teste")
-
-def modoAleatorio():
-    msgAnimada("Teste")
-
-def configuracoes():
-    msgAnimada("Teste")
-
-
-#Centralização
-TAM = 40
-
-#Animações
-ANIMACAO = True
-TEMPO = 0.02
-
-#Mostrando menus
-TEMAS = MAINTITLE = True
-
-# Definindo as palavras
-palavras = temas()
-
-# Temas disponíveis
-temasPossiveis = ["alimentos", "sentimentos", "games", "instrumentos", "filmes"]
-
-
-while True: # Repete o jogo
-
-    # Mostrar erros
-    letrasUsadas = []
-
-    # Resetando as letras
-    LETRA = ""
-    C = PRIMEIROERRO = 0
-
-    # Gerando a frase completa
-    frase = []
-
-    while True: # Atualiza as palabvras colocadas
-
-        # ---------------------------------------------------------------------------
-
-        # Adicionando tema
-        if TEMAS:
-            while True: # Consistir Temas
-
-                # Título de apresentação
-                if MAINTITLE:
-                    limpaTela()
-                    l("——")
-                    msgAnimada(f"{'Jogo da Forca':^{TAM}}", ANIMACAO)
-                    l("——")
-                    msgAnimada("Escolha um tema abaixo:", ANIMACAO)
-                    l("——")
-                else:
-                    limpaTela()
-                    l("——")
-                    msgAnimada("Escolha um outro tema abaixo:", ANIMACAO)
-                    l("——")
-
-                menu()
-
-                '''
+'''
                     ------------------------
                     Jogo da Forca
                     ------------------------
@@ -153,45 +32,141 @@ while True: # Repete o jogo
                         ------------------------
                         1 - Desativar animações
                 '''
-                # Escolhendo as categorias
-                msgAnimada("1 - Alimentos", ANIMACAO)
-                msgAnimada("2 - Sentimentos", ANIMACAO)
-                msgAnimada("3 - Games", ANIMACAO)
-                msgAnimada("4 - Instrumentos", ANIMACAO)
-                msgAnimada("5 - Filmes", ANIMACAO)
-                l("——")
 
-                # Pegando o tema que o usuário escolheu
-                msgAnimada("Sua escolha: ", ANIMACAO, "")
+# pylint: disable=c0103, r0912
 
-                try:
-                    TEMA = str(input())
-                    TEMA = int(TEMA)
+# Imports Gerais
+from random import choice
+from estilo import limpaTela, l, msgAnimada, valorInvalido
+from jogoDependencias import temas, boneco
 
-                except ValueError:
-                    valorInvalido("Digita apenas números", "——")
-                    limpaTela()
-                    ANIMACAO = False
-                    continue
+#Função pegaInteiros
+def pegarInteiros(inter=[]):
+  
+    try:
+        resp = int(input())
+        
+        if inter == []:
+            return resp
+        
+        elif resp not in inter:
+            valorInvalido("Valor fora do intervalo")
+            limpaTela()
+            return None
+            
+        return resp
+        
+    except ValueError:
+        valorInvalido("Digite apenas números inteiros")
+        limpaTela()
+        return None
 
-                if TEMA not in [1, 2, 3, 4, 5]:
-                    valorInvalido("Valor fora intervalo", "——")
-                    limpaTela()
-                    ANIMACAO = False
-                    continue
+    
+    
 
-                ANIMACAO = True
-                break
+#Criando o menu
+def menu(ANIMACAO, tema=[]):
+    
+    # Menu principal
+    while True:
+        l("——")
+        msgAnimada("1 - Iniciar")
+        msgAnimada("2 - Configurações")
+        l("——")
+        #Pegando a respota do usuário
+        msgAnimada("Sua escolha: ", True, "")
+        resp = pegarInteiros([1, 2])
+        
+        if resp == 1:
+            inicio(ANIMACAO, tema)
+            break
+        
+        elif resp == 2:
+            configuracoes()
+            break
+            
+        
+    
+def inicio(ANIMACAO, tema=[]):
+    
+    while True:
+        
+        l("——")
+        msgAnimada("1 - Alimentos", ANIMACAO)
+        msgAnimada("2 - Sentimentos", ANIMACAO)
+        msgAnimada("3 - Games", ANIMACAO)
+        msgAnimada("4 - Instrumentos", ANIMACAO)
+        msgAnimada("5 - Filmes", ANIMACAO)
+        l("——")
+        
+        #Pegando a resposta do usuário
+        msgAnimada("Sua resposta: ", True, "")
+        
+        escolha = pegarInteiros([1, 2, 3, 4, 5])
+        
+        if escolha is not None:
+            tema.append(escolha)
+            break
+        
+        
+  
+    
+def modoNormal():
+    msgAnimada("Teste")
 
-            # Escolhendo a palavra de acordo com o tema
-            word = choice(palavras[temasPossiveis[(TEMA-1)]]).lower()
+def modoAleatorio():
+    msgAnimada("Teste")
 
-            # Espaço para preencher as palavras
-            for ele in word.split():
-                frase += ["_ "] * len(ele)
-                frase += " "
-        # ---------------------------------------------------------------------------
+def configuracoes():
+    msgAnimada("Teste")
 
+
+#Centralização
+TAM = 40
+
+#Animações
+ANIMACAO = True
+TEMPO = 0.02
+
+# Definindo as palavras
+palavras = temas()
+
+# Temas disponíveis
+temasPossiveis = ["alimentos", "sentimentos", "games", "instrumentos", "filmes"]
+
+
+while True: # Repete o jogo
+
+    # Mostrar erros
+    letrasUsadas = []
+
+    # Resetando as letras
+    LETRA = ""
+    C = PRIMEIROERRO = 0
+
+    # Gerando a frase completa
+    frase = []
+    
+    #Tema escolhido pelo usuáiro
+    tema = []
+
+    # --------------------------------------------------------------------------- 
+    #Exibindo o menu do jogo
+    menu(ANIMACAO, tema)
+    print(tema)
+
+    # Escolhendo a palavra de acordo com o tema
+    word = choice(palavras[temasPossiveis[(tema[0]-1)]]).lower()
+
+    # Espaço para preencher as palavras
+    for ele in word.split():
+        frase += ["_ "] * len(ele)
+        frase += " "
+    # ---------------------------------------------------------------------------
+    
+    #Rodando o jogo
+    while True:
+        
         # Título para mostrar letras inválidas
         limpaTela()
         if PRIMEIROERRO != 0:
@@ -214,7 +189,7 @@ while True: # Repete o jogo
 
         # Mostrando o tema selecionado
         l("——", TAM)
-        TEMAESCOLHIDO = "Tema Escolhido: " + "".join(temasPossiveis[TEMA-1])
+        TEMAESCOLHIDO = "Tema Escolhido: " + "".join(temasPossiveis[tema[0]-1])
         msgAnimada(f"{TEMAESCOLHIDO:^{TAM*2}}", ANIMACAO)
 
         # 1ª Mostrando o boneco
