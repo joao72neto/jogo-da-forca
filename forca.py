@@ -69,6 +69,7 @@ def menu(ANIMACAO, tema=[]):
     
     # Menu principal
     while True:
+        limpaTela()
         l("——")
         msgAnimada("1 - Iniciar")
         msgAnimada("2 - Configurações")
