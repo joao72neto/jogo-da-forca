@@ -50,14 +50,14 @@ def pegarInteiros(inter=[]):
             return resp
         
         elif resp not in inter:
-            valorInvalido("Valor fora do intervalo")
+            valorInvalido("Valor fora do intervalo", "——")
             limpaTela()
             return None
             
         return resp
         
     except ValueError:
-        valorInvalido("Digite apenas números inteiros")
+        valorInvalido("Digite apenas números inteiros", "——")
         limpaTela()
         return None
 
@@ -65,14 +65,22 @@ def pegarInteiros(inter=[]):
     
 
 #Criando o menu
-def menu(ANIMACAO, tema=[]):
+def menu(ANIMACAO, vezesJogadas, tema):
     
     # Menu principal
     while True:
+        
+        if vezesJogadas > 0:
+            ANIMACAO=False
+        
+        #Título do jogo 
         limpaTela()
         l("——")
-        msgAnimada("1 - Iniciar")
-        msgAnimada("2 - Configurações")
+        msgAnimada(f"{'Jogo da Forca':^{TAM}}", ANIMACAO)
+        l("——")
+
+        msgAnimada("1 - Iniciar", ANIMACAO)
+        msgAnimada("2 - Configurações", ANIMACAO)
         l("——")
         #Pegando a respota do usuário
         msgAnimada("Sua escolha: ", True, "")
@@ -86,13 +94,18 @@ def menu(ANIMACAO, tema=[]):
             configuracoes()
             break
             
+        vezesJogadas = 1
         
     
-def inicio(ANIMACAO, tema=[]):
+def inicio(ANIMACAO, tema):
     
     while True:
-        
+        #Título do jogo 
+        limpaTela()
         l("——")
+        msgAnimada(f"{'Temas':^{TAM}}", False)
+        l("——")
+    
         msgAnimada("1 - Alimentos", ANIMACAO)
         msgAnimada("2 - Sentimentos", ANIMACAO)
         msgAnimada("3 - Games", ANIMACAO)
@@ -103,7 +116,10 @@ def inicio(ANIMACAO, tema=[]):
         #Pegando a resposta do usuário
         msgAnimada("Sua resposta: ", True, "")
         
-        escolha = pegarInteiros([1, 2, 3, 4, 5])
+        escolha = pegarInteiros([1, 2, 3, 4, 5, 0])
+        
+        if escolha == 0:
+            menu(ANIMACAO, 1, tema)
         
         if escolha is not None:
             tema.append(escolha)
@@ -143,7 +159,7 @@ while True: # Repete o jogo
 
     # Resetando as letras
     LETRA = ""
-    C = PRIMEIROERRO = 0
+    C = PRIMEIROERRO = vezesJogadas = 0
 
     # Gerando a frase completa
     frase = []
@@ -153,7 +169,7 @@ while True: # Repete o jogo
 
     # --------------------------------------------------------------------------- 
     #Exibindo o menu do jogo
-    menu(ANIMACAO, tema)
+    menu(ANIMACAO, vezesJogadas, tema)
     print(tema)
 
     # Escolhendo a palavra de acordo com o tema
@@ -258,8 +274,7 @@ while True: # Repete o jogo
         RESP = str(input())
 
         if RESP[0] in ["s", "S"]:
-            TEMAS = True
-            MAINTITLE = False
+            vezesJogadas = 1
             break
 
         if RESP[0] in ["n", "N"]:
