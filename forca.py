@@ -103,9 +103,10 @@ def inicio(ANIMACAO, tema):
         #Título do jogo 
         limpaTela()
         l("——")
-        msgAnimada(f"{'Temas':^{TAM}}", False)
+        msgAnimada(f"{'Escolha um tema abaixo:':^{TAM}}", False)
         l("——")
-    
+        msgAnimada("0 - Voltar", ANIMACAO)
+        l("——")
         msgAnimada("1 - Alimentos", ANIMACAO)
         msgAnimada("2 - Sentimentos", ANIMACAO)
         msgAnimada("3 - Games", ANIMACAO)
