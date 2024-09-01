@@ -61,11 +61,16 @@ def pegarInteiros(inter=[]):
         limpaTela()
         return None
 
+#Funão que mostra um título na tela 
+def titulo(msg, TAM, ANIMACAO):
+    limpaTela()
+    l("——")
+    msgAnimada(f"{msg:^{TAM}}", ANIMACAO)
+    l("——")
     
-    
-
+#----------------------------------------------------------------------------------------------
 #Criando o menu
-def menu(ANIMACAO, vezesJogadas, tema):
+def menu(ANIMACAO, vezesJogadas, TAM, tema):
     
     # Menu principal
     while True:
@@ -74,11 +79,9 @@ def menu(ANIMACAO, vezesJogadas, tema):
             ANIMACAO=False
         
         #Título do jogo 
-        limpaTela()
-        l("——")
-        msgAnimada(f"{'Jogo da Forca':^{TAM}}", ANIMACAO)
-        l("——")
+        titulo("Jogo da Forca", TAM, ANIMACAO)
 
+        #Opções do menu 
         msgAnimada("1 - Iniciar", ANIMACAO)
         msgAnimada("2 - Configurações", ANIMACAO)
         l("——")
@@ -87,20 +90,51 @@ def menu(ANIMACAO, vezesJogadas, tema):
         resp = pegarInteiros([1, 2])
         
         if resp == 1:
-            inicio(ANIMACAO, tema)
+            inicio(ANIMACAO, TAM, tema)
             break
         
-        elif resp == 2:
+        if resp == 2:
             configuracoes()
             break
             
         vezesJogadas = 1
         
     
-def inicio(ANIMACAO, tema):
-    
+def inicio(ANIMACAO, TAM, tema):
     while True:
-        #Título do jogo 
+        titulo("Escolha um modo de jogo: ", TAM, ANIMACAO)
+        
+        #Opções do submenu início
+        msgAnimada("0 - Voltar", ANIMACAO)
+        l("——")
+        msgAnimada("1 - Modo Normal", ANIMACAO)
+        msgAnimada("2 - Modo Aleatório", ANIMACAO)
+        l("——")
+
+        #Pegando a resposta do usuário
+        msgAnimada("Sua resposta: ", True, "")
+        
+        escolha = pegarInteiros([0, 1, 2])
+        
+        #Analisando a resposta do usuário
+        if escolha == 0:
+            menu(ANIMACAO, 1, TAM, tema)
+        
+        if escolha == 1:
+            modoNormal(ANIMACAO, TAM, tema)
+            break
+        
+        if escolha == 2:
+            modoAleatorio()
+            break
+        
+        
+        
+    
+def modoNormal(ANIMACAO, TAM, tema):
+    #Título do jogo 
+    while True:
+        
         limpaTela()
         l("——")
         msgAnimada(f"{'Escolha um tema abaixo:':^{TAM}}", False)
@@ -117,20 +151,18 @@ def inicio(ANIMACAO, tema):
         #Pegando a resposta do usuário
         msgAnimada("Sua resposta: ", True, "")
         
-        escolha = pegarInteiros([1, 2, 3, 4, 5, 0])
+        escolha = pegarInteiros([0, 1, 2, 3, 4, 5])
         
-        if escolha == 0:
-            menu(ANIMACAO, 1, tema)
-        
+        #Analisando as escolhas
         if escolha is not None:
             tema.append(escolha)
             break
         
+        if escolha == 0:
+            break
         
-  
-    
-def modoNormal():
-    msgAnimada("Teste")
+    if escolha == 0:
+        inicio(ANIMACAO, TAM, tema)
 
 def modoAleatorio():
     msgAnimada("Teste")
@@ -138,7 +170,7 @@ def modoAleatorio():
 def configuracoes():
     msgAnimada("Teste")
 
-
+#------------------------------------------------------------------------------------------------
 #Centralização
 TAM = 40
 
@@ -170,7 +202,7 @@ while True: # Repete o jogo
 
     # --------------------------------------------------------------------------- 
     #Exibindo o menu do jogo
-    menu(ANIMACAO, vezesJogadas, tema)
+    menu(ANIMACAO, vezesJogadas, TAM, tema)
     print(tema)
 
     # Escolhendo a palavra de acordo com o tema
