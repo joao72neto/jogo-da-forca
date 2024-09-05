@@ -111,18 +111,13 @@ def inicio(ANIMACAO, TAM, tema):
         msgAnimada("1 - Modo Normal\n", ANIMACAO)
         msgAnimada("2 - Modo Aleatório\n", ANIMACAO)
         l("——")
-        msgAnimada(f"{'0 - Voltar':>{TAM}}", ANIMACAO)
-        l("——")
 
         #Pegando a resposta do usuário
         msgAnimada("Sua resposta: ", True, "")
         
-        escolha = pegarInteiros([0, 1, 2])
+        escolha = pegarInteiros([1, 2])
         
         #Analisando a resposta do usuário
-        if escolha == 0:
-            return
-        
         if escolha == 1:
             modoNormal(ANIMACAO, TAM, tema)
             
@@ -184,6 +179,8 @@ palavras = temas()
 # Temas disponíveis
 temasPossiveis = ["alimentos", "sentimentos", "games", "instrumentos", "filmes"]
 
+#Qtd de vezes que o jogador jogou
+vezesJogadas = 0
 
 while True: # Repete o jogo
 
@@ -192,7 +189,7 @@ while True: # Repete o jogo
 
     # Resetando as letras
     LETRA = ""
-    C = PRIMEIROERRO = vezesJogadas = 0
+    C = PRIMEIROERRO = 0
 
     # Gerando a frase completa
     frase = []
