@@ -37,143 +37,19 @@
 
 # Imports Gerais
 from random import choice
-from estilo import limpaTela, l, msgAnimada, valorInvalido
-from jogoDependencias import temas, boneco
-
-#Função pegaInteiros
-def pegarInteiros(inter=[]):
-  
-    try:
-        resp = int(input())
-        
-        if inter == []:
-            return resp
-        
-        elif resp not in inter:
-            valorInvalido("Valor fora do intervalo", "——")
-            limpaTela()
-            return None
-            
-        return resp
-        
-    except ValueError:
-        valorInvalido("Digite apenas números inteiros", "——")
-        limpaTela()
-        return None
-
-#Funão que mostra um título na tela 
-def titulo(msg, TAM, ANIMACAO):
-    limpaTela()
-    l("——")
-    msgAnimada(f"{msg:^{TAM}}", ANIMACAO)
-    l("——")
-    
-#----------------------------------------------------------------------------------------------
-#Criando o menu
-def menu(ANIMACAO, vezesJogadas, TAM, tema):
-    
-    # Menu principal
-    while True:
-        
-        if vezesJogadas == 0:
-            ANIMACAO = True
-            
-            #Título do jogo 
-            titulo("JOGO DA FORCA", TAM, ANIMACAO)
-
-            #Opções do menu 
-            print()
-            msgAnimada(f"{'Enter para Iniciar':^{TAM}}", ANIMACAO)
-            print()
-            l("——")
-            
-            #Esperando o usuário pressionar qualquer tecla
-            input()
-        
-        #Indo para o submenu "Início"
-        ANIMACAO = False
-        inicio(ANIMACAO, TAM, tema)
-        
-        vezesJogadas = 0
-        
-        if len(tema) == 1:
-            return
-            
-        
-        
-    
-def inicio(ANIMACAO, TAM, tema):
-    while True:
-        titulo("MODOS DE JOGO", TAM, ANIMACAO)
-        
-        #Opções do submenu início
-        print()
-        msgAnimada("1 - Modo Normal\n", ANIMACAO)
-        msgAnimada("2 - Modo Aleatório\n", ANIMACAO)
-        l("——")
-
-        #Pegando a resposta do usuário
-        msgAnimada("Sua resposta: ", True, "")
-        
-        escolha = pegarInteiros([1, 2])
-        
-        #Analisando a resposta do usuário
-        if escolha == 1:
-            modoNormal(ANIMACAO, TAM, tema)
-            
-            if len(tema) == 1:
-                return
-        
-        if escolha == 2:
-            modoAleatorio()
-    
-       
-    
-def modoNormal(ANIMACAO, TAM, tema):
-    #Título do jogo 
-    while True:
-        
-        #Título do submenu modoNormal
-        titulo("TEMAS POSSÍVEIS", TAM, ANIMACAO)
-        print()
-        msgAnimada("1 - Alimentos\n", ANIMACAO)
-        msgAnimada("2 - Sentimentos\n", ANIMACAO)
-        msgAnimada("3 - Games\n", ANIMACAO)
-        msgAnimada("4 - Instrumentos\n", ANIMACAO)
-        msgAnimada("5 - Filmes\n", ANIMACAO)
-        l("——")
-        msgAnimada(f"{'0 - Voltar':>{TAM}}", ANIMACAO)
-        l("——")
-        
-        #Pegando a resposta do usuário
-        msgAnimada("Sua resposta: ", True, "")
-        
-        escolha = pegarInteiros([0, 1, 2, 3, 4, 5])
-        
-        
-        if escolha == 0:
-            return
-        
-        #Analisando as escolhas
-        if escolha is not None:
-            tema.append(escolha)
-            break
-
-        
-
-def modoAleatorio():
-    msgAnimada("Teste")
+from estilo import limpaTela, l, msgAnimada, titulo
+from tratarErros import valorInvalido, pegarInteiros
+from jogoElementos import temas, boneco, menu
 
 
-#------------------------------------------------------------------------------------------------
-#Centralização
+#Definindo um tamanho para a centralização
 TAM = 40
 
 #Animações
 ANIMACAO = True
 TEMPO = 0.02
 
-# Definindo as palavras
+# Definindo as palavras do jogo
 palavras = temas()
 
 # Temas disponíveis
@@ -184,11 +60,13 @@ vezesJogadas = 0
 
 while True: # Repete o jogo
 
-    # Mostrar erros
+    # Mostrar letras que já foram usadas
     letrasUsadas = []
 
     # Resetando as letras
     LETRA = ""
+    
+    #Muda o desenho do boneco
     C = PRIMEIROERRO = 0
 
     # Gerando a frase completa
@@ -197,24 +75,21 @@ while True: # Repete o jogo
     #Tema escolhido pelo usuáiro
     tema = []
 
-    # --------------------------------------------------------------------------- 
     #Exibindo o menu do jogo
     menu(ANIMACAO, vezesJogadas, TAM, tema)
-    print(tema)
 
-    # Escolhendo a palavra de acordo com o tema
+    # Escolhendo a palavra de acordo com o tema escolhido
     word = choice(palavras[temasPossiveis[(tema[0]-1)]]).lower()
 
-    # Espaço para preencher as palavras
+    # Criando o tacejado da palavra escolhida aleatóriamente
     for ele in word.split():
         frase += ["_ "] * len(ele)
         frase += " "
-    # ---------------------------------------------------------------------------
     
     #Rodando o jogo
     while True:
         
-        # Título para mostrar letras inválidas
+        # Título para mostrar letras inválidas digitadas
         limpaTela()
         if PRIMEIROERRO != 0:
 
@@ -239,26 +114,23 @@ while True: # Repete o jogo
         TEMAESCOLHIDO = "Tema Escolhido: " + "".join(temasPossiveis[tema[0]-1])
         msgAnimada(f"{TEMAESCOLHIDO:^{TAM*2}}", ANIMACAO)
 
-        # 1ª Mostrando o boneco
+        # Mostrando o boneco
         l("——", TAM)
         boneco(C, LETRA, word, frase, ANIMACAO)
 
-        # ---------------------------------------------------------------------------
 
-        # Verificando a vitória ou derrota
+        # Saindo do jogo caso o usuário acerte a palavra
         if "_ " not in frase:
             break
 
-        # Pedindo as letra para o usuário
-        TEMAS = False
-        ANIMACAO = True
+        # Pedindo as letras para o usuário
         l("——", 40)
         msgAnimada("Insira uma letra: ", ANIMACAO, "")
         ANIMACAO = False
         LETRA = input().strip()
         try:
             if not LETRA[0].isalpha():
-                # Bloco inválido 1
+                # Bloco inválido 
                 valorInvalido("Números ou símbolos não são válidos", "——", 80)
                 limpaTela()
                 continue

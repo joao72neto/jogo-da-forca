@@ -1,5 +1,7 @@
-from estilo import msgAnimada
+from estilo import msgAnimada, titulo, l
+from tratarErros import pegarInteiros
 
+#------------------------------- Temas Possíveis ---------------------------------
 def temas():
     return {
     "alimentos":
@@ -61,6 +63,9 @@ def temas():
     "Homem-Aranha", "Thor: Ragnarok", "Jurassic World", "Os Oito Odiados", "A Bela e a Fera"]
 
 }
+
+
+#------------------------------------- Boneco -------------------------------------------------
 
 # Função que anima o boneco na tela do jogo
 def boneco(contador, letra, word, frase, animacao):
@@ -161,3 +166,99 @@ def bonecoBottom():
                     |
                 ========
         """]
+    
+    #------------------------------------- Menu ---------------------------------------------
+    #Criando o menu
+def menu(ANIMACAO, vezesJogadas, TAM, tema):
+    
+    # Menu principal
+    while True:
+        
+        if vezesJogadas == 0:
+            ANIMACAO = True
+            
+            #Título do jogo 
+            titulo("JOGO DA FORCA", TAM, ANIMACAO)
+
+            #Opções do menu 
+            print()
+            msgAnimada(f"{'Enter para Iniciar':^{TAM}}", ANIMACAO)
+            print()
+            l("——")
+            
+            #Esperando o usuário pressionar qualquer tecla
+            input()
+        
+        #Indo para o submenu "Início"
+        ANIMACAO = False
+        inicio(ANIMACAO, TAM, tema)
+        
+        vezesJogadas = 0
+        
+        if len(tema) == 1:
+            return
+            
+        
+        
+    
+def inicio(ANIMACAO, TAM, tema):
+    while True:
+        titulo("MODOS DE JOGO", TAM, ANIMACAO)
+        
+        #Opções do submenu início
+        print()
+        msgAnimada("1 - Modo Normal\n", ANIMACAO)
+        msgAnimada("2 - Modo Aleatório\n", ANIMACAO)
+        l("——")
+
+        #Pegando a resposta do usuário
+        msgAnimada("Sua resposta: ", True, "")
+        
+        escolha = pegarInteiros([1, 2])
+        
+        #Analisando a resposta do usuário
+        if escolha == 1:
+            modoNormal(ANIMACAO, TAM, tema)
+            
+            if len(tema) == 1:
+                return
+        
+        if escolha == 2:
+            modoAleatorio()
+    
+       
+    
+def modoNormal(ANIMACAO, TAM, tema):
+    #Título do jogo 
+    while True:
+        
+        #Título do submenu modoNormal
+        titulo("TEMAS POSSÍVEIS", TAM, ANIMACAO)
+        print()
+        msgAnimada("1 - Alimentos\n", ANIMACAO)
+        msgAnimada("2 - Sentimentos\n", ANIMACAO)
+        msgAnimada("3 - Games\n", ANIMACAO)
+        msgAnimada("4 - Instrumentos\n", ANIMACAO)
+        msgAnimada("5 - Filmes\n", ANIMACAO)
+        l("——")
+        msgAnimada(f"{'0 - Voltar':>{TAM}}", ANIMACAO)
+        l("——")
+        
+        #Pegando a resposta do usuário
+        msgAnimada("Sua resposta: ", True, "")
+        
+        escolha = pegarInteiros([0, 1, 2, 3, 4, 5])
+        
+        
+        if escolha == 0:
+            return
+        
+        #Analisando as escolhas
+        if escolha is not None:
+            tema.append(escolha)
+            break
+
+        
+
+def modoAleatorio():
+    msgAnimada("Teste")
