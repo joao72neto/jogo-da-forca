@@ -19,7 +19,11 @@ def titulo(msg, TAM, ANIMACAO):
     l("——")
 
 #Função que limpa a tela
-limpaTela = lambda comando="clear" : system("cls") if platform.system() == "Windows" else system(comando)
+def limpaTela():
+    if platform.system() == "nt":
+        _ = system("cls")
+    else:
+        _ = system("clear")
 
 #Função anônima que imprime uma linha na tela
 l = lambda simb="-=", tam=20 : print(simb * tam)

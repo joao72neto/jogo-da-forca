@@ -97,7 +97,7 @@ while True: # Repete o jogo
         ANIMACAO = False
         LETRA = input().strip()
         
-        #Verificando se o usuário está tentando adivinhar palavra
+        #Verificando se o usuário está tentando adivinhar a palavra
         if len(word) == len(LETRA):
             if word.lower().strip() == LETRA.lower():
                 break
