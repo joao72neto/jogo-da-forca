@@ -1,44 +1,12 @@
 """Programa que simula um jogo da forca"""
 
-'''
-                    ------------------------
-                    Jogo da Forca
-                    ------------------------
-                    1 - Start
-                        0 - Voltar
-                        -----------------------
-                        Escolha um modo de jogo
-                        -----------------------
-                        1 - Modo normal
-                            0 - voltar
-                            ---------------
-                            Temas
-                            ---------------
-                            1 - Alimento
-                            2 - Sentimentos
-                            3 - games
-                            4 - Instrumentos
-                            5 - Filmes
-                            ---------------
-                            Sua escolha:
-                            ---------------
-                                <inicia o game>
-                        2 - Modo aleatório
-                            <inicia o game>
-                    2 - Settings
-                        0 - Voltar
-                        -----------------------
-                        Configurações
-                        ------------------------
-                        1 - Desativar animações
-                '''
 
 # pylint: disable=c0103, r0912
 
 # Imports Gerais
 from random import choice
-from estilo import limpaTela, l, msgAnimada, titulo
-from tratarErros import valorInvalido, pegarInteiros
+from estilo import limpaTela, l, msgAnimada
+from tratarErros import valorInvalido
 from jogoElementos import temas, boneco, menu
 
 
@@ -65,13 +33,13 @@ while True: # Repete o jogo
 
     # Resetando as letras
     LETRA = ""
-    
+
     #Muda o desenho do boneco
     C = PRIMEIROERRO = 0
 
     # Gerando a frase completa
     frase = []
-    
+
     #Tema escolhido pelo usuáiro
     tema = []
 
@@ -85,10 +53,10 @@ while True: # Repete o jogo
     for ele in word.split():
         frase += ["_ "] * len(ele)
         frase += " "
-    
+
     #Rodando o jogo
     while True:
-        
+
         # Título para mostrar letras inválidas digitadas
         limpaTela()
         if PRIMEIROERRO != 0:
@@ -128,9 +96,16 @@ while True: # Repete o jogo
         msgAnimada("Insira uma letra: ", ANIMACAO, "")
         ANIMACAO = False
         LETRA = input().strip()
+        
+        #Verificando se o usuário está tentando adivinhar palavra
+        if len(word) == len(LETRA):
+            if word.lower().strip() == LETRA.lower():
+                break
+        
+        
         try:
             if not LETRA[0].isalpha():
-                # Bloco inválido 
+                # Bloco inválido
                 valorInvalido("Números ou símbolos não são válidos", "——", 80)
                 limpaTela()
                 continue

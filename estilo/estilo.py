@@ -1,4 +1,6 @@
-#Imports gerais
+
+
+# Imports gerais
 import platform
 from os import system
 from time import sleep
@@ -9,7 +11,7 @@ from sistema import matarInput, reviverInput, limparBuffer
 TAM = 40
 
 
-#Funão que mostra um título na tela 
+#Funão que mostra um título na tela
 def titulo(msg, TAM, ANIMACAO):
     limpaTela()
     l("——")

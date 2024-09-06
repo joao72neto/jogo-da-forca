@@ -1,8 +1,13 @@
+"""Biblioteca com elementos fundamentais do jogo"""
+
 from estilo import msgAnimada, titulo, l
 from tratarErros import pegarInteiros
 
 #------------------------------- Temas Possíveis ---------------------------------
 def temas():
+
+    """Todos os possíveis tema e possíveis palavras do jogo"""
+
     return {
     "alimentos":
     ["Pizza", "Pão", "Arroz", "Frango", "Sopa", "Bolo", "Queijo",
@@ -71,10 +76,10 @@ def temas():
 def boneco(contador, letra, word, frase, animacao):
 
     """Função que Monta um boneco na Tela"""
-    
+
     #Mostando o bonceco
     top = bonecoTop()
-    bottom = bonecoBottom() 
+    bottom = bonecoBottom()
 
     #Mostrando o boneco
     msgAnimada(top[contador], animacao, "", 0.02)
@@ -91,7 +96,7 @@ def mostrarPalavra(letra, word, frase, animacao):
         # Mostrando a frase
         for ele in frase:
             msgAnimada(ele, animacao, "")
-            
+
 
 def bonecoTop():
     return ["""
@@ -129,7 +134,7 @@ def bonecoTop():
                 |   |
                 O   |
                /|\\  |     """]
-    
+
 def bonecoBottom():
     return ["""
                     |
@@ -166,17 +171,17 @@ def bonecoBottom():
                     |
                 ========
         """]
-    
+
     #------------------------------------- Menu ---------------------------------------------
     #Criando o menu
 def menu(ANIMACAO, vezesJogadas, TAM, tema):
-    
+
     # Menu principal
     while True:
-        
+
         if vezesJogadas == 0:
             ANIMACAO = True
-            
+
             #Título do jogo 
             titulo("JOGO DA FORCA", TAM, ANIMACAO)
 

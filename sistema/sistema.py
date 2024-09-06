@@ -1,4 +1,5 @@
-#Imports por plataforma
+# Imports por plataforma
+
 import platform
 from sys import stdin
 
