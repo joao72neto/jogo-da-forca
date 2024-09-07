@@ -21,7 +21,7 @@ TEMPO = 0.02
 palavras = temas()
 
 # Temas disponíveis
-temasPossiveis = ["alimentos", "sentimentos", "games", "instrumentos", "filmes"]
+temasPossiveis = list({tema for tema in palavras.keys()})
 
 #Qtd de vezes que o jogador jogou
 vezesJogadas = 0
@@ -79,7 +79,7 @@ while True: # Repete o jogo
 
         # Mostrando o tema selecionado
         l("——", TAM)
-        TEMAESCOLHIDO = "Tema Escolhido: " + "".join(temasPossiveis[tema[0]-1])
+        TEMAESCOLHIDO = "Tema Escolhido: " + "".join(temasPossiveis[tema[0]-1].capitalize())
         msgAnimada(f"{TEMAESCOLHIDO:^{TAM*2}}", ANIMACAO)
 
         # Mostrando o boneco

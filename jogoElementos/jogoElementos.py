@@ -200,6 +200,7 @@ def menu(ANIMACAO, vezesJogadas, TAM, tema):
         
         vezesJogadas = 0
         
+        #Saindo do menu caso o tema tenha sido escolhido
         if len(tema) == 1:
             return
             
@@ -208,12 +209,12 @@ def menu(ANIMACAO, vezesJogadas, TAM, tema):
     
 def inicio(ANIMACAO, TAM, tema):
     while True:
-        titulo("MODOS DE JOGO", TAM, ANIMACAO)
+        titulo("OPÇÕES DE JOGO", TAM, ANIMACAO)
         
         #Opções do submenu início
         print()
-        msgAnimada("1 - Modo Normal\n", ANIMACAO)
-        msgAnimada("2 - Modo Aleatório\n", ANIMACAO)
+        msgAnimada("1 - Escolher Tema\n", ANIMACAO)
+        msgAnimada("2 - Tema Aleatório\n", ANIMACAO)
         l("——")
 
         #Pegando a resposta do usuário
@@ -224,12 +225,13 @@ def inicio(ANIMACAO, TAM, tema):
         #Analisando a resposta do usuário
         if escolha == 1:
             modoNormal(ANIMACAO, TAM, tema)
-            
-            if len(tema) == 1:
-                return
         
         if escolha == 2:
-            modoAleatorio()
+            modoAleatorio(tema)
+            
+        #Voltando para o menu pai caso o tema tenha sido escolhido
+        if len(tema) == 1:
+            return
     
        
     
@@ -265,5 +267,11 @@ def modoNormal(ANIMACAO, TAM, tema):
 
         
 
-def modoAleatorio():
-    msgAnimada("Teste")
+def modoAleatorio(tema):
+    
+    #Import para a geração de números aleatórios 
+    from random import randint
+    
+    #Escolhendo o tema de forma aleatória
+    tema.append(randint(1, len(temas())))
+    
