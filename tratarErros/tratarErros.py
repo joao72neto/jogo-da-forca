@@ -40,4 +40,21 @@ def pegarInteiros(inter=[]):
         limpaTela()
         return None
     
+    
+#Pegando apenas valores inteiros
+def pegarCaracteres(inter=[]):
+  
+    resp = str(input()).strip().lower()
+    
+    if inter == []:
+        return resp
+    
+    elif resp not in inter:
+        valorInvalido("Caracteres Inválido", "——")
+        limpaTela()
+        return None
+        
+    return resp
+        
+
 #---------------------------------------------------------------------

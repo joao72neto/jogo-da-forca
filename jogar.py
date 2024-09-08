@@ -4,14 +4,17 @@
 # pylint: disable=c0103, r0912
 
 # Imports Gerais
-from random import choice
+from random import choice, randint
 from estilo import limpaTela, l, msgAnimada
-from tratarErros import valorInvalido
+from tratarErros import valorInvalido, pegarCaracteres
 from jogoElementos import temas, boneco, menu
 
 
 #Definindo um tamanho para a centralização
 TAM = 40
+
+#Definindo se o usuário quer mudar de modo ou não
+MUDARMODO = True
 
 #Animações
 ANIMACAO = True
@@ -26,6 +29,9 @@ temasPossiveis = list({tema for tema in palavras.keys()})
 #Qtd de vezes que o jogador jogou
 vezesJogadas = 0
 
+#Modo escolhido pelo usuaŕio
+escolhaModo = []
+
 while True: # Repete o jogo
 
     # Mostrar letras que já foram usadas
@@ -39,12 +45,20 @@ while True: # Repete o jogo
 
     # Gerando a frase completa
     frase = []
-
+    
     #Tema escolhido pelo usuáiro
     tema = []
+    
+    if MUDARMODO:
+        
+        #Exibindo o menu do jogo
+        menu(ANIMACAO, vezesJogadas, TAM, tema, escolhaModo)
+        
+    if escolhaModo[0] == 2 and vezesJogadas >= 1:
+        
+        #Mudando o tema caso o jogador tenha escolhido o modo aleatório
+        tema.append(randint(1, len(temasPossiveis)))
 
-    #Exibindo o menu do jogo
-    menu(ANIMACAO, vezesJogadas, TAM, tema)
 
     # Escolhendo a palavra de acordo com o tema escolhido
     word = choice(palavras[temasPossiveis[(tema[0]-1)]]).lower()
@@ -78,9 +92,11 @@ while True: # Repete o jogo
             print()
 
         # Mostrando o tema selecionado
+        TEMPO = 0.015
         l("——", TAM)
         TEMAESCOLHIDO = "Tema Escolhido: " + "".join(temasPossiveis[tema[0]-1].capitalize())
-        msgAnimada(f"{TEMAESCOLHIDO:^{TAM*2}}", ANIMACAO)
+        msgAnimada(f"{TEMAESCOLHIDO:^{TAM*2}}", ANIMACAO, "\n", TEMPO)
+        TEMPO = 0.02
 
         # Mostrando o boneco
         l("——", TAM)
@@ -143,23 +159,43 @@ while True: # Repete o jogo
         msgAnimada(f"{'Você sobreviveu!':^{TAM}}", ANIMACAO)
         l("——")
 
+
+
     # Perguntando se o jogador deseja jogar novamente
     SAIR = False
     while True: # Consistir S ou N
 
         msgAnimada("Deseja jogar novamente [S/N]: ", ANIMACAO, "")
-        RESP = str(input())
+        RESP = pegarCaracteres(["s", "n"])
 
-        if RESP[0] in ["s", "S"]:
+        if RESP is None:
+            continue
+        
+        if RESP == "s":
+            #Perguntando se o jogador quer mudar de modo de jogo
+            while True:
+                limpaTela()
+                l("——")
+                msgAnimada("Deseja mudar de modo de jogo? [S/N]: ", ANIMACAO, "")
+                RESP2 = pegarCaracteres(["s", "n"])
+                
+                if RESP2 is None:
+                    continue
+                    
+                if RESP2 == "n":
+                    MUDARMODO = False
+                    break
+                
+                MUDARMODO = True
+                break    
+            
+            # Atualizando a qtd de vezes que o usuaŕio jogou o jogo
             vezesJogadas = 1
             break
 
-        if RESP[0] in ["n", "N"]:
+        if RESP == "n":
             SAIR = True
             break
-
-        valorInvalido('Digite apenas "S" ou "N"', "——")
-        continue
 
     if SAIR:
         break

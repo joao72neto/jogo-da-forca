@@ -77,14 +77,16 @@ def boneco(contador, letra, word, frase, animacao):
 
     """Função que Monta um boneco na Tela"""
 
+    TEMPO = 0.015
+
     #Mostando o bonceco
     top = bonecoTop()
     bottom = bonecoBottom()
 
     #Mostrando o boneco
-    msgAnimada(top[contador], animacao, "", 0.02)
+    msgAnimada(top[contador], animacao, "", TEMPO)
     mostrarPalavra(letra, word, frase, animacao)
-    msgAnimada(bottom[contador], animacao, "\n", 0.02)
+    msgAnimada(bottom[contador], animacao, "\n", TEMPO)
 
 
 def mostrarPalavra(letra, word, frase, animacao):
@@ -174,7 +176,7 @@ def bonecoBottom():
 
     #------------------------------------- Menu ---------------------------------------------
     #Criando o menu
-def menu(ANIMACAO, vezesJogadas, TAM, tema):
+def menu(ANIMACAO, vezesJogadas, TAM, tema, escolha):
 
     # Menu principal
     while True:
@@ -196,7 +198,8 @@ def menu(ANIMACAO, vezesJogadas, TAM, tema):
         
         #Indo para o submenu "Início"
         ANIMACAO = False
-        inicio(ANIMACAO, TAM, tema)
+        
+        inicio(ANIMACAO, TAM, tema, escolha)
         
         vezesJogadas = 0
         
@@ -207,8 +210,10 @@ def menu(ANIMACAO, vezesJogadas, TAM, tema):
         
         
     
-def inicio(ANIMACAO, TAM, tema):
+def inicio(ANIMACAO, TAM, tema, escolha):
+    
     while True:
+        
         titulo("OPÇÕES DE JOGO", TAM, ANIMACAO)
         
         #Opções do submenu início
@@ -220,13 +225,21 @@ def inicio(ANIMACAO, TAM, tema):
         #Pegando a resposta do usuário
         msgAnimada("Sua resposta: ", True, "")
         
-        escolha = pegarInteiros([1, 2])
+        resp = pegarInteiros([1, 2])
+        
+        if resp is not None:
+            
+            #Resetando a lista escolha
+            if escolha != []:
+                escolha = []
+            
+            escolha.append(resp)
         
         #Analisando a resposta do usuário
-        if escolha == 1:
+        if escolha[0] == 1:
             modoNormal(ANIMACAO, TAM, tema)
         
-        if escolha == 2:
+        if escolha[0] == 2:
             modoAleatorio(tema)
             
         #Voltando para o menu pai caso o tema tenha sido escolhido

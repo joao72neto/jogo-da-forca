@@ -1,1 +1,1 @@
-from .tratarErros import valorInvalido, pegarInteiros
+from .tratarErros import valorInvalido, pegarInteiros,pegarCaracteres
