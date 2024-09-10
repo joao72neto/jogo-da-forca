@@ -229,12 +229,12 @@ def inicio(ANIMACAO, TAM, tema, escolha):
         
         if resp is not None:
             
-            #Resetando a lista escolha
-            if escolha != []:
-                escolha = []
+            #Armazenando a escolha em uma lista
+            if escolha == []:
+                escolha.append(0)
+                
+            escolha[0] = resp
             
-            escolha.append(resp)
-        
         #Analisando a resposta do usuário
         if escolha[0] == 1:
             modoNormal(ANIMACAO, TAM, tema)
