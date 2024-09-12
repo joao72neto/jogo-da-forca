@@ -1,7 +1,7 @@
 """Biblioteca com elementos fundamentais do jogo"""
 
 from estilo import msgAnimada, titulo, l
-from tratarErros import pegarInteiros
+from tratarErros import pegarInteiros, removerAcentos
 
 #------------------------------- Temas Possíveis ---------------------------------
 def temas():
@@ -91,8 +91,8 @@ def boneco(contador, letra, word, frase, animacao):
 def mostrarPalavra(letra, word, frase, animacao):
     # Montando a palavra
         for i, v in enumerate(word):
-            if v == letra:
-                frase[i] = f"{letra.upper()} "
+            if removerAcentos(v) == letra:
+                frase[i] = f"{v.upper()} "
 
         # Mostrando a frase
         for ele in frase:

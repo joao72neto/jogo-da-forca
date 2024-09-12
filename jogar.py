@@ -6,7 +6,7 @@
 # Imports Gerais
 from random import choice, randint
 from estilo import limpaTela, l, msgAnimada
-from tratarErros import valorInvalido, pegarCaracteres
+from tratarErros import valorInvalido, pegarCaracteres, removerAcentos
 from jogoElementos import temas, boneco, menu
 
 
@@ -50,21 +50,29 @@ while True: # Repete o jogo
     menu(ANIMACAO, vezesJogadas, TAM, tema)
         
     # Escolhendo a palavra de acordo com o tema escolhido
-    word = choice(palavras[temasPossiveis[(tema[0]-1)]]).lower()
+    word = "pêra"
+    #choice(palavras[temasPossiveis[(tema[0]-1)]]).lower()
 
     # Criando o tacejado da palavra escolhida aleatóriamente
     for ele in word.split():
         frase += ["_ "] * len(ele)
-        frase += " "
+        frase += [" "]
 
+    teste = [ele.lower() for ele in frase if isinstance(ele, str) and ele != "_ "]
+
+    
     #Rodando o jogo
     while True:
 
+        #Tirnado acentos da palavra
+        wordSemAcento = removerAcentos(word)
+        
         # Título para mostrar letras inválidas digitadas
         limpaTela()
+        print(wordSemAcento)
         if PRIMEIROERRO != 0:
 
-            if LETRA not in word and not LETRA.isnumeric():
+            if LETRA not in wordSemAcento and not LETRA.isnumeric():
                 if LETRA not in letrasUsadas:
                     letrasUsadas.append(LETRA[0])
 
@@ -102,26 +110,34 @@ while True: # Repete o jogo
         ANIMACAO = False
         LETRA = input().strip()
         
+        #Tirando os acentos da letra escolhida
+        LETRA = removerAcentos(LETRA)
+        
+        
         #Verificando se o usuário está tentando adivinhar a palavra
-        if len(word) == len(LETRA):
-            if word.lower().strip() == LETRA.lower():
+        if len(wordSemAcento) == len(LETRA):
+            if wordSemAcento.lower().strip() == LETRA.lower():
                 break
         
         
         try:
+            #Verificando se não é uma letra
             if not LETRA[0].isalpha():
-                # Bloco inválido
                 valorInvalido("Números ou símbolos não são válidos", "——", 80)
                 limpaTela()
                 continue
 
-            # Bloco verdadeiro
+            # Pegando só o primeiro caractere
             LETRA = LETRA[0]
-
-            if LETRA not in word or LETRA.upper() + " " in frase:
+ 
+            #Normalizando a frase para análise
+            fraseNormalizada = [removerAcentos(e.lower().strip()) for e in frase if isinstance(e, str) and e.strip() != "_"]
+ 
+            #Verificando se a letra está na palavra gerada aleatóriamente
+            if LETRA not in wordSemAcento or LETRA.lower() in fraseNormalizada:
                 C += 1
                 
-                if LETRA not in word:
+                if LETRA not in wordSemAcento:
                     PRIMEIROERRO += 1
 
             if C == 6:
