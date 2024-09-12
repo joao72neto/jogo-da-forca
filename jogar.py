@@ -120,7 +120,9 @@ while True: # Repete o jogo
 
             if LETRA not in word or LETRA.upper() + " " in frase:
                 C += 1
-                PRIMEIROERRO += 1
+                
+                if LETRA not in word:
+                    PRIMEIROERRO += 1
 
             if C == 6:
                 break
@@ -139,13 +141,16 @@ while True: # Repete o jogo
     l("——")
 
     if C == 6:
-        msgAnimada(f"{'Você morreu!':^{TAM}}", ANIMACAO)
+        msgAnimada(f"{'Você morreu! :(':^{TAM}}", ANIMACAO)
+        
+        #Mostrando qual era a palavra
+        palavraEscolhida = "A palavra era: " + "".join(word.capitalize()) 
         l("——")
-        msgAnimada(f"A palavra era: {word}")
+        msgAnimada(f"\n{palavraEscolhida:^{TAM}}\n")
         l("——")
 
     else:
-        msgAnimada(f"{'Você sobreviveu!':^{TAM}}", ANIMACAO)
+        msgAnimada(f"{'Você sobreviveu! :)':^{TAM}}", ANIMACAO)
         l("——")
 
 

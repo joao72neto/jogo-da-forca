@@ -1,6 +1,7 @@
 from estilo import msgAnimada, l, limpaTela
 from time import sleep
 from sistema import matarInput, reviverInput, limparBuffer
+import unicodedata
 
 #Definindo um tamanho padrão
 TAM = 40
@@ -57,4 +58,12 @@ def pegarCaracteres(inter=[]):
     return resp
         
 
+
+#Função que remove os acentos das palavras
+def removerAcentos(msg):
+    msgNormalizado = unicodedata.normalize("NFKD", msg)
+    
+    msgSemAcentos = ''.join(letra for letra in msgNormalizado if not unicodedata.combining(letra))
+    
+    return msgSemAcentos
 #---------------------------------------------------------------------
