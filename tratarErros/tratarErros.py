@@ -7,7 +7,7 @@ import unicodedata
 TAM = 40
 
 #Mostrando mensagem de valor não correspondente 
-def valorInvalido(texto="Valor Inválido", simb = "-=", tam=TAM, tempo=0.03, animacao=True):
+def valorInvalido(texto="Valor Inválido", simb = "-=", tam=TAM, tempo=0.02, animacao=True):
     old = matarInput()
     try:
         limpaTela()

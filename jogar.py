@@ -50,8 +50,7 @@ while True: # Repete o jogo
     menu(ANIMACAO, vezesJogadas, TAM, tema)
         
     # Escolhendo a palavra de acordo com o tema escolhido
-    word = "pêra"
-    #choice(palavras[temasPossiveis[(tema[0]-1)]]).lower()
+    word = choice(palavras[temasPossiveis[(tema[0]-1)]]).lower()
 
     # Criando o tacejado da palavra escolhida aleatóriamente
     for ele in word.split():
@@ -69,10 +68,9 @@ while True: # Repete o jogo
         
         # Título para mostrar letras inválidas digitadas
         limpaTela()
-        print(wordSemAcento)
         if PRIMEIROERRO != 0:
 
-            if LETRA not in wordSemAcento and not LETRA.isnumeric():
+            if LETRA not in wordSemAcento and LETRA.isalpha():
                 if LETRA not in letrasUsadas:
                     letrasUsadas.append(LETRA[0])
 
@@ -89,7 +87,7 @@ while True: # Repete o jogo
             print()
 
         # Mostrando o tema selecionado
-        TEMPO = 0.015
+        #TEMPO = 0.015
         l("——", TAM)
         TEMAESCOLHIDO = "Tema Escolhido: " + "".join(temasPossiveis[tema[0]-1].capitalize())
         msgAnimada(f"{TEMAESCOLHIDO:^{TAM*2}}", ANIMACAO, "\n", TEMPO)

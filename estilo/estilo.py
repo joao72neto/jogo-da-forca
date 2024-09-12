@@ -1,5 +1,4 @@
 
-
 # Imports gerais
 import platform
 from os import system

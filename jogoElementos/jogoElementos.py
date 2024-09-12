@@ -16,7 +16,7 @@ def temas():
     "Cenoura", "Morango", "Abacate", "Laranja", "Tomate", "Coco", "Melão",
     "Biscoito", "Iogurte", "Macarrão", "Abobrinha", "Pimenta", "Pêra",
     "Alface", "Berinjela", "Espinafre", "Azeitona", "Brócolis", "Castanha",
-    "Noz", "Amendoim", "Batata-doce", "Granola", "Açúcar", "Mel", "Goiaba",
+    "Noz", "Amendoim", "Batata doce", "Granola", "Açúcar", "Mel", "Goiaba",
     "Lentilha", "Rabanete", "Couve"],
     "esportes":
     ["futebol", "basquete", "vôlei", "tênis", "natação", "ciclismo", "corrida",
@@ -26,20 +26,20 @@ def temas():
     "atletismo", "arremesso de peso", "lançamento de dardo", "salto em altura",
     "salto com vara", "remo", "canoagem", "windsurf", "esqui", "snowboard",
     "biatlo", "triatlo", "pentatlo moderno", "taekwondo", "kickboxing",
-    "muay thai", "jiu-jitsu", "parkour", "dança esportiva", "esgrima",
+    "muay thai", "jiu jitsu", "parkour", "dança esportiva", "esgrima",
     "softbol", "futsal", "esportes eletrônicos", "motocross", "rali", "fórmula 1",
     "automobilismo", "vela", "tênis de mesa", "caminhada", "maratona", "trail running",
     "corrida de aventura", "pesca esportiva", "arqueirismo", "polo", "bocha"],
     "games":
     ["Super Mario", "The Legend of Zelda", "Minecraft", "Fortnite", "Call of Duty",
     "Overwatch", "The Witcher", "Red Dead Redemption", "Grand Theft Auto", "Halo",
-    "Assassin's Creed", "FIFA", "League of Legends", "Valorant","Cyberpunk 2077",
+    "Assassins Creed", "FIFA", "League of Legends", "Valorant","Cyberpunk 2077",
     "Dark Souls", "Elden Ring", "Animal Crossing", "Pokémon", "Metroid", "Tetris",
     "Street Fighter", "Mortal Kombat", "Tekken", "Resident Evil", "Silent Hill",
     "Bloodborne", "Horizon Zero Dawn", "God of War", "Uncharted", "Tomb Raider",
     "Final Fantasy", "Dragon Quest", "World of Warcraft", "Starcraft", "Diablo",
-    "The Sims", "SimCity", "Fallout", "Mass Effect", "Half-Life", "Dota 2",
-    "Counter-Strike", "Portal", "Apex Legends", "Rocket League", "PUBG", "Among Us",
+    "The Sims", "SimCity", "Fallout", "Mass Effect", "Half Life", "Dota 2",
+    "Counter Strike", "Portal", "Apex Legends", "Rocket League", "PUBG", "Among Us",
     "Celeste", "Stardew Valley", "Terraria", "Hades", "Undertale", "Bioshock",
     "Gears of War", "Borderlands", "Far Cry", "Splatoon", "Destiny"],
     "instrumentos":
@@ -59,12 +59,12 @@ def temas():
     "De Volta para o Futuro", "O Rei Leão", "A Lista de Schindler", "O Silêncio dos Inocentes",
     "O Resgate do Soldado Ryan", "Alien", "O Exterminador do Futuro", "Coração Valente",
     "Indiana Jones", "Os Bons Companheiros", "Casablanca", "Os Suspeitos", "Tubarão", "Rocky",
-    "E.T. - O Extraterrestre", "O Iluminado", "Scarface", "O Sexto Sentido",
-    "Seven: Os Sete Crimes Capitais", "Coringa", "Piratas do Caribe", "Vingadores: Ultimato",
+    "ET O Extraterrestre", "O Iluminado", "Scarface", "O Sexto Sentido",
+    "Os Sete Crimes Capitais", "Coringa", "Piratas do Caribe", "Vingadores Ultimato",
     "Harry Potter", "Capitão América", "Pantera Negra", "O Homem de Ferro", "O Hobbit",
     "Guardiões da Galáxia", "O Lobo de Wall Street", "Django Livre", "O Grande Gatsby",
     "A Origem dos Guardiões", "O Código Da Vinci", "Missão Impossível", "Os Incríveis",
-    "Homem-Aranha", "Thor: Ragnarok", "Jurassic World", "Os Oito Odiados", "A Bela e a Fera"]
+    "Homem Aranha", "Thor Ragnarok", "Jurassic World", "Os Oito Odiados", "A Bela e a Fera"]
 
 }
 
@@ -76,7 +76,7 @@ def boneco(contador, letra, word, frase, animacao):
 
     """Função que Monta um boneco na Tela"""
 
-    TEMPO = 0.015
+    TEMPO = 0.02
 
     #Mostando o bonceco
     top = bonecoTop()
