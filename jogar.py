@@ -24,13 +24,10 @@ TEMPO = 0.02
 palavras = temas()
 
 # Temas disponíveis
-temasPossiveis = list({tema for tema in palavras.keys()})
+temasPossiveis = list(palavras.keys())
 
 #Qtd de vezes que o jogador jogou
 vezesJogadas = 0
-
-#Modo escolhido pelo usuaŕio
-escolhaModo = []
 
 while True: # Repete o jogo
 
@@ -49,17 +46,9 @@ while True: # Repete o jogo
     #Tema escolhido pelo usuáiro
     tema = []
     
-    if MUDARMODO:
+    #Exibindo o menu do jogo
+    menu(ANIMACAO, vezesJogadas, TAM, tema)
         
-        #Exibindo o menu do jogo
-        menu(ANIMACAO, vezesJogadas, TAM, tema, escolhaModo)
-        
-    if escolhaModo[0] == 2 and vezesJogadas >= 1:
-        
-        #Mudando o tema caso o jogador tenha escolhido o modo aleatório
-        tema.append(randint(1, len(temasPossiveis)))
-
-
     # Escolhendo a palavra de acordo com o tema escolhido
     word = choice(palavras[temasPossiveis[(tema[0]-1)]]).lower()
 
@@ -160,7 +149,6 @@ while True: # Repete o jogo
         l("——")
 
 
-
     # Perguntando se o jogador deseja jogar novamente
     SAIR = False
     while True: # Consistir S ou N
@@ -172,30 +160,19 @@ while True: # Repete o jogo
             continue
         
         if RESP == "s":
-            #Perguntando se o jogador quer mudar de modo de jogo
-            while True:
-                limpaTela()
-                l("——")
-                msgAnimada("Deseja mudar de modo de jogo? [S/N]: ", ANIMACAO, "")
-                RESP2 = pegarCaracteres(["s", "n"])
-                
-                if RESP2 is None:
-                    continue
-                    
-                if RESP2 == "n":
-                    MUDARMODO = False
-                    break
-                
-                MUDARMODO = True
-                break    
             
             # Atualizando a qtd de vezes que o usuaŕio jogou o jogo
             vezesJogadas = 1
             break
 
-        if RESP == "n":
-            SAIR = True
-            break
+        SAIR = True
+        break
 
     if SAIR:
         break
+
+#Despedindo
+limpaTela()
+l("——")
+msgAnimada(f"{'Obrigado por Jogar :)':^{TAM}}", ANIMACAO)
+l("——")

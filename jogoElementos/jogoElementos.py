@@ -18,19 +18,18 @@ def temas():
     "Alface", "Berinjela", "Espinafre", "Azeitona", "Brócolis", "Castanha",
     "Noz", "Amendoim", "Batata-doce", "Granola", "Açúcar", "Mel", "Goiaba",
     "Lentilha", "Rabanete", "Couve"],
-    "sentimentos":
-    ["amigo", "futuro", "coragem", "felicidade", "alegria", "esperança",
-    "amizade", "sabedoria", "liberdade", "saudade", "aventura", "carinho",
-    "honestidade", "solidariedade", "justiça", "confiança", "RESPeito",
-    "gentileza", "humildade", "empatia", "persistência", "gratidao",
-    "determinação", "integridade", "paciência", "resiliência", "criatividade",
-    "inspiração", "equilíbrio", "tranquilidade", "sabedoria", "generosidade",
-    "compaixão", "tolerância", "serenidade", "fidelidade", "otimismo",
-    "entusiasmo", "prudência", "temperança", "lealdade", "altruísmo",
-    "compromisso", "serenidade", "honra", "dignidade", "coragem", "valentia",
-    "liderança", "vigilância", "disciplina", "versatilidade", "sabedoria",
-    "imparcialidade", "decisão", "criatividade", "dedicação", "zelo",
-    "firmeza", "confiança", "Respeito", "sabedoria", "amizade", "esperança"],
+    "esportes":
+    ["futebol", "basquete", "vôlei", "tênis", "natação", "ciclismo", "corrida",
+    "ginástica", "boxe", "esgrima", "judô", "karatê", "surf", "skate", "golfe",
+    "hóquei", "handebol", "beisebol", "críquete", "badminton", "rugby",
+    "pólo aquático", "escalada", "patinação", "levantamento de peso",
+    "atletismo", "arremesso de peso", "lançamento de dardo", "salto em altura",
+    "salto com vara", "remo", "canoagem", "windsurf", "esqui", "snowboard",
+    "biatlo", "triatlo", "pentatlo moderno", "taekwondo", "kickboxing",
+    "muay thai", "jiu-jitsu", "parkour", "dança esportiva", "esgrima",
+    "softbol", "futsal", "esportes eletrônicos", "motocross", "rali", "fórmula 1",
+    "automobilismo", "vela", "tênis de mesa", "caminhada", "maratona", "trail running",
+    "corrida de aventura", "pesca esportiva", "arqueirismo", "polo", "bocha"],
     "games":
     ["Super Mario", "The Legend of Zelda", "Minecraft", "Fortnite", "Call of Duty",
     "Overwatch", "The Witcher", "Red Dead Redemption", "Grand Theft Auto", "Halo",
@@ -176,7 +175,7 @@ def bonecoBottom():
 
     #------------------------------------- Menu ---------------------------------------------
     #Criando o menu
-def menu(ANIMACAO, vezesJogadas, TAM, tema, escolha):
+def menu(ANIMACAO, vezesJogadas, TAM, tema):
 
     # Menu principal
     while True:
@@ -199,7 +198,7 @@ def menu(ANIMACAO, vezesJogadas, TAM, tema, escolha):
         #Indo para o submenu "Início"
         ANIMACAO = False
         
-        inicio(ANIMACAO, TAM, tema, escolha)
+        inicio(ANIMACAO, TAM, tema)
         
         vezesJogadas = 0
         
@@ -210,7 +209,7 @@ def menu(ANIMACAO, vezesJogadas, TAM, tema, escolha):
         
         
     
-def inicio(ANIMACAO, TAM, tema, escolha):
+def inicio(ANIMACAO, TAM, tema):
     
     while True:
         
@@ -225,21 +224,13 @@ def inicio(ANIMACAO, TAM, tema, escolha):
         #Pegando a resposta do usuário
         msgAnimada("Sua resposta: ", True, "")
         
-        resp = pegarInteiros([1, 2])
+        escolha = pegarInteiros([1, 2])
         
-        if resp is not None:
-            
-            #Armazenando a escolha em uma lista
-            if escolha == []:
-                escolha.append(0)
-                
-            escolha[0] = resp
-            
         #Analisando a resposta do usuário
-        if escolha[0] == 1:
+        if escolha == 1:
             modoNormal(ANIMACAO, TAM, tema)
         
-        if escolha[0] == 2:
+        if escolha == 2:
             modoAleatorio(tema)
             
         #Voltando para o menu pai caso o tema tenha sido escolhido
@@ -255,11 +246,10 @@ def modoNormal(ANIMACAO, TAM, tema):
         #Título do submenu modoNormal
         titulo("TEMAS POSSÍVEIS", TAM, ANIMACAO)
         print()
-        msgAnimada("1 - Alimentos\n", ANIMACAO)
-        msgAnimada("2 - Sentimentos\n", ANIMACAO)
-        msgAnimada("3 - Games\n", ANIMACAO)
-        msgAnimada("4 - Instrumentos\n", ANIMACAO)
-        msgAnimada("5 - Filmes\n", ANIMACAO)
+        
+        for i, ele in enumerate(temas().keys()):
+            msgAnimada(f"{i+1} - {ele.capitalize()}\n", ANIMACAO)
+        
         l("——")
         msgAnimada(f"{'0 - Voltar':>{TAM}}", ANIMACAO)
         l("——")
@@ -267,7 +257,7 @@ def modoNormal(ANIMACAO, TAM, tema):
         #Pegando a resposta do usuário
         msgAnimada("Sua resposta: ", True, "")
         
-        escolha = pegarInteiros([0, 1, 2, 3, 4, 5])
+        escolha = pegarInteiros(range(len(temas())+1))
         
         
         if escolha == 0:
