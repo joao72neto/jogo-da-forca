@@ -152,38 +152,40 @@ while True: # Repete o jogo
     # Status
     ANIMACAO = True
     limpaTela()
-    l("——")
-
-    if C == 6:
-        msgAnimada(f"{'Você morreu! :(':^{TAM}}", ANIMACAO)
+    while True: # Consistir, jogar novamente
         
-        #Mostrando qual era a palavra
-        palavraEscolhida = "A palavra era: " + "".join(word.capitalize()) 
-        l("——")
-        msgAnimada(f"\n{palavraEscolhida:^{TAM}}\n")
         l("——")
 
-    else:
-        msgAnimada(f"{'Você sobreviveu! :)':^{TAM}}", ANIMACAO)
-        l("——")
+        if C == 6:
+            msgAnimada(f"{'Você morreu! :(':^{TAM}}", ANIMACAO)
+            
+            #Mostrando qual era a palavra
+            palavraEscolhida = "A palavra era: " + "".join(word.capitalize()) 
+            l("——")
+            msgAnimada(f"\n{palavraEscolhida:^{TAM}}\n", ANIMACAO)
+            l("——")
+
+        else:
+            msgAnimada(f"{'Você sobreviveu! :)':^{TAM}}", ANIMACAO)
+            l("——")
 
 
-    # Perguntando se o jogador deseja jogar novamente
-    SAIR = False
-    while True: # Consistir S ou N
-
+        # Perguntando se o jogador deseja jogar novamente
+        SAIR = False
         msgAnimada("Deseja jogar novamente [S/N]: ", ANIMACAO, "")
         RESP = pegarCaracteres(["s", "n"])
 
+
         if RESP is None:
+            ANIMACAO = False
             continue
         
         if RESP == "s":
-            
-            # Atualizando a qtd de vezes que o usuaŕio jogou o jogo
-            vezesJogadas = 1
+            ANIMACAO = True
+            vezesJogadas += 1
             break
 
+        ANIMACAO = True
         SAIR = True
         break
 
