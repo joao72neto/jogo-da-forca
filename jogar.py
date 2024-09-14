@@ -158,6 +158,7 @@ while True: # Repete o jogo
             continue
 
     # Status
+    vezesJogadas += 1
     ANIMACAO = True
     limpaTela()
     while True: # Consistir, jogar novamente
@@ -189,7 +190,6 @@ while True: # Repete o jogo
         
         if RESP == "s":
             ANIMACAO = True
-            vezesJogadas += 1
             break
 
         ANIMACAO = True
@@ -202,5 +202,10 @@ while True: # Repete o jogo
 #Despedindo
 limpaTela()
 l("——")
-msgAnimada(f"{'Obrigado por Jogar :)':^{TAM}}", ANIMACAO)
+if vezesJogadas == 0:
+    msgAnimada(f"{'Volte Sempre :)':^{TAM}}", ANIMACAO)
+
+else:
+    msgAnimada(f"{'Obrigado por Jogar :)':^{TAM}}", ANIMACAO)
+    
 l("——")
