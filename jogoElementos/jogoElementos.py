@@ -175,7 +175,7 @@ def bonecoBottom():
 
     #------------------------------------- Menu ---------------------------------------------
     #Criando o menu
-def menu(ANIMACAO, vezesJogadas, TAM, tema):
+def menu(ANIMACAO, vezesJogadas, TAM, tema, SAIR):
 
     # Menu principal
     while True:
@@ -198,18 +198,18 @@ def menu(ANIMACAO, vezesJogadas, TAM, tema):
         #Indo para o submenu "Início"
         ANIMACAO = False
         
-        inicio(ANIMACAO, TAM, tema)
+        inicio(ANIMACAO, TAM, tema, SAIR)
         
         vezesJogadas = 0
         
         #Saindo do menu caso o tema tenha sido escolhido
-        if len(tema) == 1:
+        if len(tema) == 1 or SAIR[0]:
             return
             
         
         
     
-def inicio(ANIMACAO, TAM, tema):
+def inicio(ANIMACAO, TAM, tema, SAIR):
     
     while True:
         
@@ -219,13 +219,13 @@ def inicio(ANIMACAO, TAM, tema):
         print()
         msgAnimada("1 - Escolher Tema\n", ANIMACAO)
         msgAnimada("2 - Tema Aleatório\n", ANIMACAO)
-        msgAnimada("3 - Sair")
+        msgAnimada("3 - Sair\n", ANIMACAO)
         l("——")
 
         #Pegando a resposta do usuário
         msgAnimada("Sua resposta: ", True, "")
         
-        escolha = pegarInteiros([1, 2])
+        escolha = pegarInteiros([1, 2, 3])
         
         #Analisando a resposta do usuário
         if escolha == 1:
@@ -233,6 +233,10 @@ def inicio(ANIMACAO, TAM, tema):
         
         if escolha == 2:
             modoAleatorio(tema)
+            
+        if escolha == 3:
+            SAIR[0] = True
+            return
             
         #Voltando para o menu pai caso o tema tenha sido escolhido
         if len(tema) == 1:

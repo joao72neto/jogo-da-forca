@@ -20,6 +20,9 @@ MUDARMODO = True
 ANIMACAO = True
 TEMPO = 0.02
 
+#Saindo do programa
+SAIR = [False]
+
 # Definindo as palavras do jogo
 palavras = temas()
 
@@ -47,8 +50,13 @@ while True: # Repete o jogo
     tema = []
     
     #Exibindo o menu do jogo
-    menu(ANIMACAO, vezesJogadas, TAM, tema)
+    menu(ANIMACAO, vezesJogadas, TAM, tema, SAIR)
         
+        
+    #Verificando se o usuário deseja sair do jogo
+    if SAIR[0]:
+        break    
+    
     # Escolhendo a palavra de acordo com o tema escolhido
     word = choice(palavras[temasPossiveis[(tema[0]-1)]]).lower()
 
@@ -171,7 +179,6 @@ while True: # Repete o jogo
 
 
         # Perguntando se o jogador deseja jogar novamente
-        SAIR = False
         msgAnimada("Deseja jogar novamente [S/N]: ", ANIMACAO, "")
         RESP = pegarCaracteres(["s", "n"])
 
@@ -186,10 +193,10 @@ while True: # Repete o jogo
             break
 
         ANIMACAO = True
-        SAIR = True
+        SAIR[0] = True
         break
 
-    if SAIR:
+    if SAIR[0]:
         break
 
 #Despedindo
