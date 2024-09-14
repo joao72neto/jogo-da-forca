@@ -219,6 +219,7 @@ def inicio(ANIMACAO, TAM, tema):
         print()
         msgAnimada("1 - Escolher Tema\n", ANIMACAO)
         msgAnimada("2 - Tema Aleatório\n", ANIMACAO)
+        msgAnimada("3 - Sair")
         l("——")
 
         #Pegando a resposta do usuário
