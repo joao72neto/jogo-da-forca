@@ -17,7 +17,7 @@
 ##
 
 <p align="left">
-  <b>Modificações feitas por mim:</b>
+  <b>Modificações feitas no projeto:</b>
 </p>
 
  - Criação de bibliotecas e funções próprias; 
